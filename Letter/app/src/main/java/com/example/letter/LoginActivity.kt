@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity()
         binding.login.setEnabled(false)//이름, 학번, 학과를 다 입력하기 전에 버튼 못누르게 함
         setContentView(view)//화면 출력
 
-        (binding.NAME).addTextChangedListener(object : TextWatcher {
+        (binding.editText3).addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 name=p0.toString()
                 if((name.equals("")||number.equals("")||major.equals(""))==false)//타이핑시 마지막으로 작동
@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity()
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
 
-        (binding.NUMBER).addTextChangedListener(object : TextWatcher{
+        (binding.editText).addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
                 number=p0.toString()
                 if((name.equals("")||number.equals("")||major.equals(""))==false)
@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity()
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
 
-        (binding.MAJOR).addTextChangedListener(object : TextWatcher{
+        (binding.editText2).addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
                 major=p0.toString()
                 if((name.equals("")||number.equals("")||major.equals(""))==false)
