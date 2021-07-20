@@ -13,6 +13,7 @@ class LoginActivity : AppCompatActivity()
     var name : String? = ""
     var number : String? = ""
     var major : String? = ""
+    var tact : String? =""
     override fun onCreate(savedInstanceState: Bundle?)
     {
 
@@ -25,7 +26,7 @@ class LoginActivity : AppCompatActivity()
         (binding.NAME).addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 name=p0.toString()
-                if((name.equals("")||number.equals("")||major.equals(""))==false)//타이핑시 마지막으로 작동
+                if((name.equals("")||number.equals("")||major.equals("")||tact.equals(""))==false)
                     binding.login.setEnabled(true)
                 else
                     binding.login.setEnabled(false)
@@ -41,7 +42,7 @@ class LoginActivity : AppCompatActivity()
             override fun afterTextChanged(p0: Editable?)
             {
                 number=p0.toString()
-                if((name.equals("")||number.equals("")||major.equals(""))==false)
+                if((name.equals("")||number.equals("")||major.equals("")||tact.equals(""))==false)
                     binding.login.setEnabled(true)
                 else
                     binding.login.setEnabled(false)
@@ -55,7 +56,21 @@ class LoginActivity : AppCompatActivity()
         (binding.MAJOR).addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
                 major=p0.toString()
-                if((name.equals("")||number.equals("")||major.equals(""))==false)
+                if((name.equals("")||number.equals("")||major.equals("")||tact.equals(""))==false)
+                    binding.login.setEnabled(true)
+                else
+                    binding.login.setEnabled(false)
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+
+        (binding.TACT).addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+                tact=p0.toString()
+                if((name.equals("")||number.equals("")||major.equals("")||tact.equals(""))==false)
                     binding.login.setEnabled(true)
                 else
                     binding.login.setEnabled(false)
@@ -71,6 +86,7 @@ class LoginActivity : AppCompatActivity()
             ToMain.putExtra("name",name)//메인으로 정보 전달
             ToMain.putExtra("number",number)//메인으로 정보 전달
             ToMain.putExtra("major",major)//메인으로 정보 전달
+            ToMain.putExtra("tact",tact)
             startActivity(ToMain)//버튼이 눌리면 로그인 이후 화면으로 이동
         }
     }
