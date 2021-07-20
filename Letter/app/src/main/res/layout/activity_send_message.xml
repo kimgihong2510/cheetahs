@@ -133,6 +133,8 @@
         android:layout_below="@id/InfoLayout"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
+        android:textAlignment="center"
+        android:gravity="center"
         android:id="@+id/SetColor"
         />
 
@@ -164,14 +166,14 @@
             android:layout_width="65dp"
             android:layout_height="match_parent"
             android:layout_gravity="right|center_horizontal"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="50dp"
             android:text="던지기"
             android:textSize="10sp"/>
         <Button
             android:layout_width="65dp"
             android:layout_height="match_parent"
             android:layout_gravity="left|center_horizontal"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="50dp"
             android:text=""
             android:textSize="10sp"/>
 
