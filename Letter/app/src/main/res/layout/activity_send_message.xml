@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="20_유준호_심컴"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:layout_gravity="right|top"
             android:layout_marginRight="20dp"
             android:gravity="center_horizontal"
