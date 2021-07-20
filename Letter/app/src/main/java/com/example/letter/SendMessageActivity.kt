@@ -2,7 +2,10 @@ package com.example.letter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import com.example.letter.databinding.ActivitySendMessageBinding
+import java.time.chrono.JapaneseEra.values
+
 
 class SendMessageActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySendMessageBinding
@@ -27,6 +30,11 @@ class SendMessageActivity : AppCompatActivity() {
         binding.MinPicker.minValue=0
         binding.MinPicker.maxValue=59
 
+        val purpose= arrayOf("친목", "멘토", "멘티", "취준")
+        val myAdapter=ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, purpose)
+        binding.SetColor.adapter=myAdapter
+
+        binding.ProfilePicture.setImageResource(R.drawable.ic_launcher_background)
     }
 
 }

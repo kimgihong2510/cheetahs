@@ -33,12 +33,12 @@
         <activity android:name=".VerifyOnProcessActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ShowProfileActivity" />
-        <activity android:name=".SendMessageActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".ShowMessageActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".SendMessageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
