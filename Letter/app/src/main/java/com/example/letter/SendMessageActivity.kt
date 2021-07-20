@@ -13,14 +13,26 @@ import com.example.letter.databinding.ActivitySendMessageBinding
 
 class SendMessageActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySendMessageBinding
+    private lateinit var number:String
+    private lateinit var major:String
+    private lateinit var name:String
+    private lateinit var tact:String
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
+        this.name = intent.getStringExtra("name").toString()
+        this.number = intent.getStringExtra("number").toString()
+        this.major = intent.getStringExtra("major").toString()
+        this.tact = intent.getStringExtra("tact").toString()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_message)
 
+        var toprint=number.substring(2,4)+"_"+name.substring(0,3)+"_"+major.substring(0,2)
+
         binding= ActivitySendMessageBinding.inflate(layoutInflater)
         val view=binding.root
+        binding.Profile.text=toprint
         setContentView(view)
 
         Toast.makeText(this, "이 창을 나가면 다시 쪽지를 볼 수 없습니다.", Toast.LENGTH_LONG).show()

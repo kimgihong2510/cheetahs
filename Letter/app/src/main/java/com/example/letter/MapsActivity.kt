@@ -60,6 +60,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.Write.setOnClickListener{
             val ToSendMessage= Intent(this,SendMessageActivity::class.java)
+            ToSendMessage.putExtra("name",name)
+            ToSendMessage.putExtra("number",number)
+            ToSendMessage.putExtra("major",major)
+            ToSendMessage.putExtra("tact",tact)
             startActivity(ToSendMessage)
         }
 
