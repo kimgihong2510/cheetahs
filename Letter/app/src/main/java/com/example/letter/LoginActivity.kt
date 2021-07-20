@@ -90,5 +90,4 @@ class LoginActivity : AppCompatActivity()
             startActivity(ToMaps)//버튼이 눌리면 로그인 이후 화면으로 이동
         }
     }
-
 }
