@@ -52,10 +52,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val KNU = LatLng(35.88854411766635, 128.61026914603167)
+        val KNU = LatLng(35.888166756477105, 128.61056411139742)
         mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(18f))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(KNU))
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(18F))
     }
 
 }
