@@ -162,7 +162,7 @@
         android:layout_above="@id/ButtonSection"
         android:id="@+id/letter"
         android:text="나이스"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
         android:background="@color/purpose4"/>
 

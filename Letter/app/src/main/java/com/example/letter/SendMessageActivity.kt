@@ -7,12 +7,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.letter.databinding.ActivitySendMessageBinding
 import java.time.chrono.JapaneseEra.values
 
 
 class SendMessageActivity : AppCompatActivity() {
-    private lateinit var binding:ActivitySendMessageBinding
+    private lateinit var binding: ActivitySendMessageBinding
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +23,8 @@ class SendMessageActivity : AppCompatActivity() {
         binding= ActivitySendMessageBinding.inflate(layoutInflater)
         val view=binding.root
         setContentView(view)
+
+        Toast.makeText(this, "이 창을 나가면 다시 쪽지를 볼 수 없습니다.", Toast.LENGTH_LONG).show()
 
         //인원수, 시간, 분 롤
         binding.PersonPicker.minValue=0
