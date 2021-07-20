@@ -34,11 +34,11 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ShowProfileActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ShowMessageActivity" />
+        <activity android:name= ".ShowMessageActivity"/>
         <activity android:name=".MainActivity" />
+        <activity android:name=".SendMessageActivity"/>
         <activity android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".SendMessageActivity">
+            android:label="@string/title_activity_maps" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

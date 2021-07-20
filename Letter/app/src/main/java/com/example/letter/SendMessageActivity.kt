@@ -67,12 +67,10 @@ class SendMessageActivity : AppCompatActivity() {
         binding.ProfilePicture.setOnClickListener{
             val nextIntent= Intent(this, ShowProfileActivity::class.java)
             startActivity(nextIntent)
-            overridePendingTransition(R.anim.enter,R.anim.exit)
         }
         binding.Profile.setOnClickListener{
             val nextIntent= Intent(this, ShowProfileActivity::class.java)
             startActivity(nextIntent)
-            overridePendingTransition(R.anim.enter,R.anim.exit)
         }
     }
 }
