@@ -1,15 +1,14 @@
 package com.example.letter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.letter.databinding.ActivitySendMessageBinding
-import java.time.chrono.JapaneseEra.values
 
 
 class SendMessageActivity : AppCompatActivity() {
@@ -29,8 +28,8 @@ class SendMessageActivity : AppCompatActivity() {
         //인원수, 시간, 분 롤
         binding.PersonPicker.minValue=0
         binding.PersonPicker.maxValue=10
-        val ArrayPicker= arrayOf("제한 없음", "1명", "2명", "3명", "4명", "5명", "6명", " 7명", "8명", "9명", "10명")
-        binding.PersonPicker.displayedValues= ArrayPicker
+        val arrayPicker= arrayOf("제한 없음", "1명", "2명", "3명", "4명", "5명", "6명", " 7명", "8명", "9명", "10명")
+        binding.PersonPicker.displayedValues= arrayPicker
 
         binding.HourPicker.minValue=0
         binding.HourPicker.maxValue=30
@@ -63,5 +62,17 @@ class SendMessageActivity : AppCompatActivity() {
 
         //프로필 사진
         binding.ProfilePicture.setImageResource(R.drawable.ic_launcher_background)
+
+        //프로필 사진, 프로필 눌리면 프로필 페이지로 연결'
+        binding.ProfilePicture.setOnClickListener{
+            val nextIntent= Intent(this, ShowProfileActivity::class.java)
+            startActivity(nextIntent)
+            overridePendingTransition(R.anim.enter,R.anim.exit)
+        }
+        binding.Profile.setOnClickListener{
+            val nextIntent= Intent(this, ShowProfileActivity::class.java)
+            startActivity(nextIntent)
+            overridePendingTransition(R.anim.enter,R.anim.exit)
+        }
     }
 }
