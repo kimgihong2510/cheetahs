@@ -46,4 +46,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(KNU))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(18F))
     }
+
 }
