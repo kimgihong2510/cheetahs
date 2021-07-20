@@ -82,12 +82,12 @@ class LoginActivity : AppCompatActivity()
         })
 
         binding.login.setOnClickListener{
-            val ToMain=Intent(this,MainActivity::class.java)
-            ToMain.putExtra("name",name)//메인으로 정보 전달
-            ToMain.putExtra("number",number)//메인으로 정보 전달
-            ToMain.putExtra("major",major)//메인으로 정보 전달
-            ToMain.putExtra("tact",tact)
-            startActivity(ToMain)//버튼이 눌리면 로그인 이후 화면으로 이동
+            val ToMaps=Intent(this,MapsActivity::class.java)
+            ToMaps.putExtra("name",name)//메인으로 정보 전달
+            ToMaps.putExtra("number",number)//메인으로 정보 전달
+            ToMaps.putExtra("major",major)//메인으로 정보 전달
+            ToMaps.putExtra("tact",tact)
+            startActivity(ToMaps)//버튼이 눌리면 로그인 이후 화면으로 이동
         }
     }
 

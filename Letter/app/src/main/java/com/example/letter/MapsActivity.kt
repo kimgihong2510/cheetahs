@@ -10,14 +10,25 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.letter.databinding.ActivityMapsBinding
+import com.example.letter.databinding.MainBinding
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private lateinit var name:String//로그인 화면에서 가져옴
+    private lateinit var number:String//로그인 화면에서 가져옴
+    private lateinit var major:String//로그인 화면에서 가져옴
+    private lateinit var tact:String//로그인 화면에서 가져옴
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        this.name = intent.getStringExtra("name").toString()
+        this.major = intent.getStringExtra("major").toString()
+        this.number = intent.getStringExtra("number").toString()
+        this.tact = intent.getStringExtra("tact").toString()
+
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)

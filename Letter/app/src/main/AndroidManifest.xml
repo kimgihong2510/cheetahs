@@ -33,7 +33,7 @@
         <activity android:name=".VerifyOnProcessActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ShowProfileActivity" />
-        <activity android:name=".MapsinActivity" />
+        <activity android:name=".MapsActivity" />
         <activity android:name= ".ShowMessageActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".SendMessageActivity"/>
