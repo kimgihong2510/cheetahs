@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity()
         binding.login.setEnabled(false)//이름, 학번, 학과를 다 입력하기 전에 버튼 못누르게 함
         setContentView(view)//화면 출력
 
-        (binding.editText3).addTextChangedListener(object : TextWatcher {
+        (binding.NAME).addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 name=p0.toString()
                 if((name.equals("")||number.equals("")||major.equals(""))==false)//타이핑시 마지막으로 작동
@@ -37,8 +37,9 @@ class LoginActivity : AppCompatActivity()
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
 
-        (binding.editText).addTextChangedListener(object : TextWatcher{
-            override fun afterTextChanged(p0: Editable?) {
+        (binding.NUMBER).addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?)
+            {
                 number=p0.toString()
                 if((name.equals("")||number.equals("")||major.equals(""))==false)
                     binding.login.setEnabled(true)
@@ -51,7 +52,7 @@ class LoginActivity : AppCompatActivity()
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
 
-        (binding.editText2).addTextChangedListener(object : TextWatcher{
+        (binding.MAJOR).addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
                 major=p0.toString()
                 if((name.equals("")||number.equals("")||major.equals(""))==false)
@@ -66,7 +67,11 @@ class LoginActivity : AppCompatActivity()
         })
 
         binding.login.setOnClickListener{
-            startActivity(Intent(this,MainActivity::class.java))//버튼이 눌리면 로그인 이후 화면으로 이동
+            val ToMain=Intent(this,MainActivity::class.java)
+            ToMain.putExtra("name",name)//메인으로 정보 전달
+            ToMain.putExtra("number",number)//메인으로 정보 전달
+            ToMain.putExtra("major",major)//메인으로 정보 전달
+            startActivity(ToMain)//버튼이 눌리면 로그인 이후 화면으로 이동
         }
     }
 
