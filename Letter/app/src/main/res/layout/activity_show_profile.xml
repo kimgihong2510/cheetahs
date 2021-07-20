@@ -1,9 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShowProfileActivity">
+    tools:context=".SendMessageActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/ProfileSection"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left|top"
+            android:layout_marginLeft="20dp"
+            app:cardCornerRadius="50dp">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ProfilePicture"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="20_유준호_심컴"
+            android:textSize="40sp"
+            android:layout_gravity="right|top"
+            android:layout_marginRight="20dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"/>
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/ProfileSection"
+        android:id="@+id/InfoSection"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textAlignment="center"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"
+            android:text="Contact: "
+            android:gravity="center_horizontal"
+            android:id="@+id/contact"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/contact"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"
+            android:text="kkt: YooYoo\nIG: YouYou"
+            android:gravity="center_horizontal" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/ButtonSection"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center_horizontal"
+            android:layout_marginLeft="50dp"
+            android:text=""
+            android:textSize="10sp"/>
+
+    </FrameLayout>
+
+
+</RelativeLayout>
