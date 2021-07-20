@@ -1,5 +1,6 @@
 package com.example.letter
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -56,6 +57,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(18f))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(KNU))
+
+        binding.Write.setOnClickListener{
+            val ToSendMessage= Intent(this,SendMessageActivity::class.java)
+            startActivity(ToSendMessage)
+        }
+
     }
 
 }

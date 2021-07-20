@@ -21,40 +21,40 @@
         >
 
         <Button
+            android:id="@+id/Throw"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="top"
-            android:padding="5dp"
             android:layout_margin="2dp"
-            android:text="던진 쪽찌"
-            />
+            android:padding="5dp"
+            android:text="던진 쪽찌" />
 
         <Button
+            android:id="@+id/Catch"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="top"
-            android:padding="5dp"
             android:layout_margin="2dp"
-            android:text="낚을 쪽찌"
-            />
+            android:padding="5dp"
+            android:text="낚을 쪽찌" />
 
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/Write"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="bottom|right"
         android:layout_margin="10dp"
-        android:src="@drawable/ic_launcher_foreground"
-        />
+        android:src="@drawable/ic_launcher_foreground" />
 
     <ImageButton
+        android:id="@+id/refresh"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="top|right"
         android:layout_margin="10dp"
         android:padding="5dp"
-        android:src="@drawable/ic_launcher_background"
-        />
+        android:src="@drawable/ic_launcher_background" />
 
 </FrameLayout>
