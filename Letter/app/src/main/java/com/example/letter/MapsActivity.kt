@@ -21,6 +21,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 
+    var ThrowCatchMode="Throw"
+
     private lateinit var binding: ActivityMapsBinding
     private lateinit var name:String//로그인 화면에서 가져옴
     private lateinit var number:String//로그인 화면에서 가져옴
@@ -80,6 +82,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        binding.Throw.setOnClickListener {
+            ThrowCatchMode="Catch"
+        }
+        binding.Catch.setOnClickListener {
+            ThrowCatchMode="Throw"
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -262,8 +271,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun ShowLetter() : Unit{
         var LetterCoordinate=CurrentCoordinate
+        var Lettermode="Thhow"
         var marker : Marker
-        if(CheckInRadius(LetterCoordinate)){
+        if(CheckInRadius(LetterCoordinate) && Lettermode==ThrowCatchMode){
             marker=mMap.addMarker(MarkerOptions()
                 .position(LetterCoordinate)
                 .title("5/7")
@@ -309,5 +319,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .fillColor(Color.argb(70,30,255, 255))
         )
     }
-
 }
