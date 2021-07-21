@@ -1,5 +1,6 @@
 package com.example.letter
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -68,8 +69,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -77,6 +76,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         this.major = intent.getStringExtra("major").toString()
         this.number = intent.getStringExtra("number").toString()
         this.tact = intent.getStringExtra("tact").toString()
+
 
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
@@ -88,6 +88,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         binding.Catch.setOnClickListener {
             ThrowCatchMode="Throw"
+        }
+
+        binding.Write.setOnClickListener{
+            val ToSendMessage= Intent(this,SendMessageActivity::class.java)
+            startActivity(ToSendMessage)
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
