@@ -19,6 +19,9 @@ class LoginActivity : AppCompatActivity()
     var tact : String? =""
     override fun onCreate(savedInstanceState: Bundle?)
     {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+
         val sAdapter = ArrayAdapter.createFromResource(this,R.array.majors,android.R.layout.simple_spinner_dropdown_item)
         super.onCreate(savedInstanceState)
         binding = LoginBinding.inflate(layoutInflater)
