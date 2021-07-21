@@ -25,10 +25,17 @@ class SendMessageActivity : AppCompatActivity() {
         this.major = intent.getStringExtra("major").toString()
         this.tact = intent.getStringExtra("tact").toString()
 
+        if(major.contains("컴퓨터"))
+            major = "컴학"
+        else if(major.contains("전기"))
+            major = "전기"
+        else
+            major = "전자"
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_message)
 
-        var toprint=number.substring(2,4)+"_"+name.substring(0,3)+"_"+major.substring(0,2)
+        var toprint=number.substring(2,4)+"_"+name.substring(0,3)+"_"+major
 
         binding= ActivitySendMessageBinding.inflate(layoutInflater)
         val view=binding.root
