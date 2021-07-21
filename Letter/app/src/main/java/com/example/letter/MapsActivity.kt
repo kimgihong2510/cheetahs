@@ -120,7 +120,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in Coordinate and move the camera
         mMap.moveCamera(CameraUpdateFactory.zoomTo(18F))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(KNU))
-        mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
+        //mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
 
         googleMap.addPolygon(PolygonOptions()
             .add(
@@ -168,34 +168,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val latLng=LatLng(latitude, longitude)
                 CurrentCoordinate=latLng
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18F))
-                try {
-                    mapCircle.remove()
-                }
-                catch(e: Exception){
-                    println("hi1")
-                }
-                try {
-                    mapDot.remove()
-                }
-                catch(e: Exception){
-                    println("hi2")
-                }
-                mapCircle= mMap.addCircle(
-                    CircleOptions()
-                        .center(latLng)
-                        .radius(Radius)
-                        .strokeWidth(2f)
-                        .strokeColor(Color.argb(200,0,255, 255))
-                        .fillColor(Color.argb(20,0,255, 255))
-                )
-                mapDot= mMap.addCircle(
-                    CircleOptions()
-                        .center(latLng)
-                        .radius(3.0)
-                        .strokeWidth(2f)
-                        .strokeColor(Color.argb(20,30,255, 255))
-                        .fillColor(Color.argb(70,30,255, 255))
-                )
+
+                showcircle()
+                ShowLetter()
             }
         }
     }
@@ -247,7 +222,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onResume(){
         super.onResume()
-
         permissionCheck(cancel={
             showPermissionInfoDialog()
         }, ok={
@@ -287,14 +261,53 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun ShowLetter() : Unit{
-        var LetterCoordinate=KNU
+        var LetterCoordinate=CurrentCoordinate
+        var marker : Marker
         if(CheckInRadius(LetterCoordinate)){
-
+            marker=mMap.addMarker(MarkerOptions()
+                .position(LetterCoordinate)
+                .title("5/7")
+                .snippet("3:15"))
+            marker.showInfoWindow()
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.letter))
         }
     }
-    fun CheckInRadius(LetterCoordinate: LatLng) : Boolean{
-        val Lat=LetterCoordinate.latitude-CurrentCoordinate.latitude
-        val Lng=LetterCoordinate.longitude-CurrentCoordinate.longitude
+
+    val latlngtometers = 111139
+    private fun CheckInRadius(LetterCoordinate: LatLng) : Boolean{
+        var Lat=(LetterCoordinate.latitude-CurrentCoordinate.latitude)*latlngtometers
+        var Lng=(LetterCoordinate.longitude-CurrentCoordinate.longitude)*latlngtometers
         return kotlin.math.sqrt(Lat * Lat + Lng * Lng) <=Radius
     }
+    fun showcircle() : Unit{
+        try {
+            mapCircle.remove()
+        }
+        catch(e: Exception){
+            println("hi1")
+        }
+        try {
+            mapDot.remove()
+        }
+        catch(e: Exception){
+            println("hi2")
+        }
+        mapCircle= mMap.addCircle(
+            CircleOptions()
+                .center(CurrentCoordinate)
+                .radius(Radius)
+                .strokeWidth(2f)
+                .strokeColor(Color.argb(200,0,255, 255))
+                .fillColor(Color.argb(20,0,255, 255))
+        )
+        mapDot= mMap.addCircle(
+            CircleOptions()
+                .center(CurrentCoordinate)
+                .radius(3.0)
+                .strokeWidth(2f)
+                .strokeColor(Color.argb(20,30,255, 255))
+                .fillColor(Color.argb(70,30,255, 255))
+        )
+    }
+
 }
