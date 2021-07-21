@@ -30,15 +30,16 @@ class LoginActivity : AppCompatActivity()
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                major = ""
+                binding.login.setEnabled(false)
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val majors = getResources().getStringArray(R.array.majors)
-                if (p2 != 0) {
-                    major = majors[p2]
-                } else
-                    major = ""
+                major=majors[p2]
+                if((name.equals("")||number.equals("")||major.equals("전공 선택")||tact.equals(""))==false)
+                    binding.login.setEnabled(true)
+                else
+                    binding.login.setEnabled(false)
             }
         }
 
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity()
         (binding.NAME).addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 name=p0.toString()
-                if((name.equals("")||number.equals("")||major.equals("")||tact.equals(""))==false)
+                if((name.equals("")||number.equals("")||major.equals("전공 선택")||tact.equals(""))==false)
                     binding.login.setEnabled(true)
                 else
                     binding.login.setEnabled(false)
@@ -62,7 +63,7 @@ class LoginActivity : AppCompatActivity()
             override fun afterTextChanged(p0: Editable?)
             {
                 number=p0.toString()
-                if((name.equals("")||number.equals("")||major.equals("")||tact.equals(""))==false)
+                if((name.equals("")||number.equals("")||major.equals("전공 선택")||tact.equals(""))==false)
                     binding.login.setEnabled(true)
                 else
                     binding.login.setEnabled(false)
@@ -78,7 +79,7 @@ class LoginActivity : AppCompatActivity()
         (binding.TACT).addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
                 tact=p0.toString()
-                if((name.equals("")||number.equals("")||major.equals("")||tact.equals(""))==false)
+                if((name.equals("")||number.equals("")||major.equals("전공 선택")||tact.equals(""))==false)
                     binding.login.setEnabled(true)
                 else
                     binding.login.setEnabled(false)
