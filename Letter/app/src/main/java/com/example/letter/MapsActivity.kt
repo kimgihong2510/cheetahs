@@ -14,6 +14,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import java.lang.Math.sqrt
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -30,6 +31,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: MyLocationCallBack
     private val REQUEST_ACCESS_FINE_LOCATION=1000
+    val Radius=50.0
     private lateinit var mapCircle : Circle
     private lateinit var mapDot:Circle
     lateinit var CurrentCoordinate : LatLng
@@ -181,7 +183,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 mapCircle= mMap.addCircle(
                     CircleOptions()
                         .center(latLng)
-                        .radius(50.0)
+                        .radius(Radius)
                         .strokeWidth(2f)
                         .strokeColor(Color.argb(200,0,255, 255))
                         .fillColor(Color.argb(20,0,255, 255))
@@ -282,5 +284,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val bee = -aX * m + aY // y = mx + b
         val x = (pY - bee) / m // algebra is neat!
         return x > pX
+    }
+
+    fun ShowLetter() : Unit{
+        var LetterCoordinate=KNU
+        if(CheckInRadius(LetterCoordinate)){
+
+        }
+    }
+    fun CheckInRadius(LetterCoordinate: LatLng) : Boolean{
+        val Lat=LetterCoordinate.latitude-CurrentCoordinate.latitude
+        val Lng=LetterCoordinate.longitude-CurrentCoordinate.longitude
+        return kotlin.math.sqrt(Lat * Lat + Lng * Lng) <=Radius
     }
 }
