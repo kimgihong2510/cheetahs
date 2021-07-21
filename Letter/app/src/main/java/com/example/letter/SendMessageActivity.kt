@@ -42,8 +42,6 @@ class SendMessageActivity : AppCompatActivity() {
         binding.Profile.text=toprint
         setContentView(view)
 
-        Toast.makeText(this, "이 창을 나가면 다시 쪽지를 볼 수 없습니다.", Toast.LENGTH_LONG).show()
-
         //인원수, 시간, 분 롤
         binding.PersonPicker.minValue=0
         binding.PersonPicker.maxValue=10

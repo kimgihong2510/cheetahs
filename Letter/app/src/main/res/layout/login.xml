@@ -19,6 +19,7 @@
 
     <Spinner
         android:id="@+id/MAJOR"
+        style="@android:style/Widget.Holo.Light.Spinner"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"

@@ -1,11 +1,15 @@
 package com.example.letter
+
 import android.annotation.SuppressLint
+import android.app.PendingIntent.getActivity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -19,6 +23,7 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
@@ -140,7 +145,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(KNU))
         //mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
 
-        googleMap.addPolygon(PolygonOptions()
+        /*googleMap.addPolygon(PolygonOptions()
             .add(
                 BorderArray[0],
                 BorderArray[1],
@@ -168,6 +173,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 BorderArray[23]
             )
         )
+         */
     }
 
 
@@ -279,18 +285,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun ShowLetter() : Unit{
+
         var LetterCoordinate=CurrentCoordinate
         var Lettermode="Throw"
         var marker : Marker
-        if(CheckInRadius(LetterCoordinate) && Lettermode==ThrowCatchMode){
+        if(CheckInRadius(LetterCoordinate) && Lettermode==ThrowCatchMode){ //던지는 모드이면 경대 안인지도 확인해줘야됨.
             marker=mMap.addMarker(MarkerOptions()
                 .position(LetterCoordinate)
                 .title("5/7")
-                .snippet("3:15"))
+                .snippet("3:15")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1)))
             marker.showInfoWindow()
-            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.letter))
         }
     }
+
 
     val latlngtometers = 111139
     private fun CheckInRadius(LetterCoordinate: LatLng) : Boolean{
