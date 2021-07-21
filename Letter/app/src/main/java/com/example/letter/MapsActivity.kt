@@ -91,6 +91,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         binding.Write.setOnClickListener{
             val ToSendMessage= Intent(this,SendMessageActivity::class.java)
+            ToSendMessage.putExtra("name",name)//메인으로 정보 전달
+            ToSendMessage.putExtra("number",number)//메인으로 정보 전달
+            ToSendMessage.putExtra("major",major)//메인으로 정보 전달
+            ToSendMessage.putExtra("tact",tact)//메인으로 정보 전달
             startActivity(ToSendMessage)
         }
 
