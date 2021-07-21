@@ -37,7 +37,7 @@ class SendMessageActivity : AppCompatActivity() {
 
         var toprint=number.substring(2,4)+"_"+name.substring(0,3)+"_"+major
 
-        binding= ActivitySendMessageBinding.inflate(layoutInflater)
+        binding = ActivitySendMessageBinding.inflate(layoutInflater)
         val view=binding.root
         binding.Profile.text=toprint
         setContentView(view)
@@ -85,10 +85,18 @@ class SendMessageActivity : AppCompatActivity() {
         //프로필 사진, 프로필 눌리면 프로필 페이지로 연결'
         binding.ProfilePicture.setOnClickListener{
             val nextIntent= Intent(this, ShowProfileActivity::class.java)
+            nextIntent.putExtra("name",name)
+            nextIntent.putExtra("number",number)
+            nextIntent.putExtra("major",major)
+            nextIntent.putExtra("tact",tact)
             startActivity(nextIntent)
         }
         binding.Profile.setOnClickListener{
             val nextIntent= Intent(this, ShowProfileActivity::class.java)
+            nextIntent.putExtra("name",name)
+            nextIntent.putExtra("number",number)
+            nextIntent.putExtra("major",major)
+            nextIntent.putExtra("tact",tact)
             startActivity(nextIntent)
         }
     }
