@@ -89,7 +89,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.Catch.setOnClickListener {
             ThrowCatchMode="Throw"
         }
-
         binding.Write.setOnClickListener{
             val ToSendMessage= Intent(this,SendMessageActivity::class.java)
             startActivity(ToSendMessage)
