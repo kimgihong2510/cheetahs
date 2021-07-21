@@ -31,14 +31,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationCallback: MyLocationCallBack
     private val REQUEST_ACCESS_FINE_LOCATION=1000
     private lateinit var mapCircle : Circle
+    private lateinit var mapDot:Circle
     lateinit var CurrentCoordinate : LatLng
     val KNU = LatLng(35.888166756477105, 128.61056411139742)
-    val Border1 = LatLng(35.891144, 128.603872)
-    val Border2 = LatLng(35.885720, 128.602730)
-    val Border3 = LatLng(35.883830, 128.615279)
-    val Border4 = LatLng(35.892905, 128.620085)
-    val Border5 = LatLng(35.898328, 128.611631)
-    lateinit var borderline : Polygon
+    val BorderArray = arrayListOf(
+        LatLng(35.889540, 128.603830)
+        ,LatLng(35.888454, 128.603830)
+        ,LatLng(35.886672, 128.604828)
+        ,LatLng(35.886401, 128.607551)
+        ,LatLng(35.886058, 128.607506)
+        ,LatLng(35.885795, 128.607842)
+        ,LatLng(35.885744, 128.608309)
+        ,LatLng(35.885417, 128.608756)
+        ,LatLng(35.885313, 128.609412)
+        ,LatLng(35.885654, 128.609570)
+        ,LatLng(35.885682, 128.609947)
+        ,LatLng(35.886272, 128.609987)
+        ,LatLng(35.886174, 128.612861)
+        ,LatLng(35.885498, 128.613825)
+        ,LatLng(35.884895, 128.614136)
+        ,LatLng(35.885571, 128.615380)
+        ,LatLng(35.888731, 128.616920)
+        ,LatLng(35.890126, 128.616177)
+        ,LatLng(35.894846, 128.613726)
+        ,LatLng(35.895387, 128.614280)
+        ,LatLng(35.895725, 128.613741)
+        ,LatLng(35.895854, 128.613119)
+        ,LatLng(35.892524, 128.609283)
+        ,LatLng(35.889688, 128.603978)
+    )
+
 
 
 
@@ -61,6 +83,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        //GoogleMap.uiSettings().setScrollGesturesEnabled(false)
 
         locationInit()
     }
@@ -93,13 +116,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Coordinate and move the camera
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(17F))
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(18F))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(KNU))
         mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
 
-        borderline=googleMap.addPolygon(PolygonOptions()
+        googleMap.addPolygon(PolygonOptions()
             .add(
-                Border1, Border2, Border3, Border4, Border5
+                BorderArray[0],
+                BorderArray[1],
+                BorderArray[2],
+                BorderArray[3],
+                BorderArray[4],
+                BorderArray[5],
+                BorderArray[6],
+                BorderArray[7],
+                BorderArray[8],
+                BorderArray[9],
+                BorderArray[10],
+                BorderArray[11],
+                BorderArray[12],
+                BorderArray[13],
+                BorderArray[14],
+                BorderArray[15],
+                BorderArray[16],
+                BorderArray[17],
+                BorderArray[18],
+                BorderArray[19],
+                BorderArray[20],
+                BorderArray[21],
+                BorderArray[22],
+                BorderArray[23]
             )
         )
     }
@@ -119,20 +165,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             location?.run{
                 val latLng=LatLng(latitude, longitude)
                 CurrentCoordinate=latLng
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18F))
                 try {
                     mapCircle.remove()
                 }
                 catch(e: Exception){
-                    println("hi")
+                    println("hi1")
+                }
+                try {
+                    mapDot.remove()
+                }
+                catch(e: Exception){
+                    println("hi2")
                 }
                 mapCircle= mMap.addCircle(
                     CircleOptions()
                         .center(latLng)
-                        .radius(70.0)
+                        .radius(50.0)
                         .strokeWidth(2f)
                         .strokeColor(Color.argb(200,0,255, 255))
                         .fillColor(Color.argb(20,0,255, 255))
+                )
+                mapDot= mMap.addCircle(
+                    CircleOptions()
+                        .center(latLng)
+                        .radius(3.0)
+                        .strokeWidth(2f)
+                        .strokeColor(Color.argb(20,30,255, 255))
+                        .fillColor(Color.argb(70,30,255, 255))
                 )
             }
         }
