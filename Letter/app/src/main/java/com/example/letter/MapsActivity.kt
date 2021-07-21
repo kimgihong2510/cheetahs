@@ -21,6 +21,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 
+    var ThrowCatchMode="Throw"
+
     private lateinit var binding: ActivityMapsBinding
     private lateinit var name:String//로그인 화면에서 가져옴
     private lateinit var number:String//로그인 화면에서 가져옴
@@ -81,6 +83,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
 
+        binding.Throw.setOnClickListener {
+            ThrowCatchMode="Catch"
+        }
+        binding.Catch.setOnClickListener {
+            ThrowCatchMode="Throw"
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -120,7 +129,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in Coordinate and move the camera
         mMap.moveCamera(CameraUpdateFactory.zoomTo(18F))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(KNU))
-        mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
+        //mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
 
         googleMap.addPolygon(PolygonOptions()
             .add(
@@ -168,34 +177,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val latLng=LatLng(latitude, longitude)
                 CurrentCoordinate=latLng
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18F))
-                try {
-                    mapCircle.remove()
-                }
-                catch(e: Exception){
-                    println("hi1")
-                }
-                try {
-                    mapDot.remove()
-                }
-                catch(e: Exception){
-                    println("hi2")
-                }
-                mapCircle= mMap.addCircle(
-                    CircleOptions()
-                        .center(latLng)
-                        .radius(Radius)
-                        .strokeWidth(2f)
-                        .strokeColor(Color.argb(200,0,255, 255))
-                        .fillColor(Color.argb(20,0,255, 255))
-                )
-                mapDot= mMap.addCircle(
-                    CircleOptions()
-                        .center(latLng)
-                        .radius(3.0)
-                        .strokeWidth(2f)
-                        .strokeColor(Color.argb(20,30,255, 255))
-                        .fillColor(Color.argb(70,30,255, 255))
-                )
+
+                showcircle()
+                ShowLetter()
             }
         }
     }
@@ -247,7 +231,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onResume(){
         super.onResume()
-
         permissionCheck(cancel={
             showPermissionInfoDialog()
         }, ok={
@@ -287,14 +270,53 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun ShowLetter() : Unit{
-        var LetterCoordinate=KNU
-        if(CheckInRadius(LetterCoordinate)){
-
+        var LetterCoordinate=CurrentCoordinate
+        var Lettermode="Thhow"
+        var marker : Marker
+        if(CheckInRadius(LetterCoordinate) && Lettermode==ThrowCatchMode){
+            marker=mMap.addMarker(MarkerOptions()
+                .position(LetterCoordinate)
+                .title("5/7")
+                .snippet("3:15"))
+            marker.showInfoWindow()
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.letter))
         }
     }
-    fun CheckInRadius(LetterCoordinate: LatLng) : Boolean{
-        val Lat=LetterCoordinate.latitude-CurrentCoordinate.latitude
-        val Lng=LetterCoordinate.longitude-CurrentCoordinate.longitude
+
+    val latlngtometers = 111139
+    private fun CheckInRadius(LetterCoordinate: LatLng) : Boolean{
+        var Lat=(LetterCoordinate.latitude-CurrentCoordinate.latitude)*latlngtometers
+        var Lng=(LetterCoordinate.longitude-CurrentCoordinate.longitude)*latlngtometers
         return kotlin.math.sqrt(Lat * Lat + Lng * Lng) <=Radius
+    }
+    fun showcircle() : Unit{
+        try {
+            mapCircle.remove()
+        }
+        catch(e: Exception){
+            println("hi1")
+        }
+        try {
+            mapDot.remove()
+        }
+        catch(e: Exception){
+            println("hi2")
+        }
+        mapCircle= mMap.addCircle(
+            CircleOptions()
+                .center(CurrentCoordinate)
+                .radius(Radius)
+                .strokeWidth(2f)
+                .strokeColor(Color.argb(200,0,255, 255))
+                .fillColor(Color.argb(20,0,255, 255))
+        )
+        mapDot= mMap.addCircle(
+            CircleOptions()
+                .center(CurrentCoordinate)
+                .radius(3.0)
+                .strokeWidth(2f)
+                .strokeColor(Color.argb(20,30,255, 255))
+                .fillColor(Color.argb(70,30,255, 255))
+        )
     }
 }
