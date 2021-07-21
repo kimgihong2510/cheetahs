@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "majors">
+        <item>전공 선택</item>
+        <item>컴퓨터학부</item>
+        <item>전자공학부</item>
+        <item>전기공학과</item>
+    </string-array>
+</resources>
