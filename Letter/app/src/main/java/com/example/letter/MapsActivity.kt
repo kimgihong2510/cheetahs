@@ -2,6 +2,8 @@ package com.example.letter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
@@ -15,7 +17,6 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import java.lang.Math.sqrt
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -279,7 +280,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun ShowLetter() : Unit{
         var LetterCoordinate=CurrentCoordinate
-        var Lettermode="Thhow"
+        var Lettermode="Throw"
         var marker : Marker
         if(CheckInRadius(LetterCoordinate) && Lettermode==ThrowCatchMode){
             marker=mMap.addMarker(MarkerOptions()
