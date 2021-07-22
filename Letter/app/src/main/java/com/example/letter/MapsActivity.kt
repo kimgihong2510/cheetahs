@@ -341,15 +341,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
 
             if(CheckInRadius(LetterCoordinate) && isPointInPolygon(LetterCoordinate, BorderArray)){
-                marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
-                    .position(LetterCoordinate)
-                    .title(LetterList.data.get(i).eti)
-                    .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1))
-                )
-                println(i)
-                markerID+=LetterList.data.get(i).id
 
+                when(LetterList.data.get(i).cat) {
+                    "친목"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
+                        .position(LetterCoordinate)
+                        .title(LetterList.data.get(i).eti)
+                        .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1)))
+                    "멘토"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
+                        .position(LetterCoordinate)
+                        .title(LetterList.data.get(i).eti)
+                        .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose2)))
+                    "멘티"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
+                        .position(LetterCoordinate)
+                        .title(LetterList.data.get(i).eti)
+                        .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose3)))
+                    "친목"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
+                        .position(LetterCoordinate)
+                        .title(LetterList.data.get(i).eti)
+                        .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose4)))
+                }
+                markerID+=LetterList.data.get(i).id
             }
         }
 
