@@ -71,7 +71,6 @@ class ShowMessageActivity : AppCompatActivity() {
             nextIntent.putExtra("major", cpymajor)
             nextIntent.putExtra("tact", cpytact)
             startActivity(nextIntent)
-            finish()
         }
 
 

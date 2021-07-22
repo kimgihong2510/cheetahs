@@ -399,7 +399,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-        var flag = 0
+        var flag : Int = 0
         for (i in 0..(marker.size - 1)) {
             if (p0 == marker[i]) {
                 flag = i
@@ -409,7 +409,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         println(markerID[flag])
 
         val nextIntent= Intent(this, ShowMessageActivity::class.java)
-        nextIntent.putExtra("id", markerID[flag])
+        nextIntent.putExtra("id", markerID[flag].toString())
         nextIntent.putExtra("cpyname", name)
         nextIntent.putExtra("cpynumber", number)
         nextIntent.putExtra("cpymajor", major)
