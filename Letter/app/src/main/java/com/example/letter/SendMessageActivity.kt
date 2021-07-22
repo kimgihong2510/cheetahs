@@ -175,6 +175,7 @@ class SendMessageActivity : AppCompatActivity() {
 
             val eti :String = dateFormat.format(calendar.time)//서버에 넘어갈 시간 변수 string
 
+
             startActivity(nextIntent)
 
 

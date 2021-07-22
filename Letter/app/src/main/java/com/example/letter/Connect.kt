@@ -38,7 +38,6 @@ class Connect {
         val message: String
     )
     data class ALLMessageParams(
-        var id: Int =0,
         var lat: String ="",
         var lon: String ="",
         var cat: String ="",
@@ -78,9 +77,9 @@ class Connect {
     }
 
     interface GETshowMessage{
-        @GET("/showMessage/:{messageId}")
+        @GET("/showMessage/{messageId}")
         fun showMessage(
-            @Path("messageId") messageId:Int
+            @Path("messageId") messageId:String
         ): Call<ShowMessageStruct>
     }
 }
