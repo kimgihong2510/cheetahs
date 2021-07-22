@@ -72,6 +72,7 @@ class SendMessageActivity : AppCompatActivity() {
 
         binding.MinPicker.minValue=0
         binding.MinPicker.maxValue=59
+        binding.MinPicker.value=30
 
         binding.PersonPicker.setOnValueChangedListener { numberPicker, i, i2 ->
             when{
