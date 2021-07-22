@@ -73,20 +73,25 @@ class ShowMessageActivity : AppCompatActivity() {
             startActivity(nextIntent)
         }
 
-
         val retrofit = Retrofit.Builder()
             .baseUrl("http://25.61.78.177:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+        println(id)
         val api = retrofit.create(Connect.GETshowMessage::class.java)!!
-        var letters=api.showMessage(id) // message ID            //id 값 받아오는걸로 수정
-
+        var letters=api.showMessage(id.toString()) // message ID            //id 값 받아오는걸로 수정
+        println(id)
+        println(id)
+        println(id)
+        println(id)
         letters.enqueue(object : Callback<Connect.ShowMessageStruct> {
             override fun onResponse(
                 call: Call<Connect.ShowMessageStruct>,
                 response: Response<Connect.ShowMessageStruct>
             ) {
+                println(response.body())
+                println(response)
                 var tmp=response.body() as Connect.ShowMessageStruct
                 //println(tmp.data[1].id)                                   //인덱스 값 확인
                 lat = tmp.data[0].lat
