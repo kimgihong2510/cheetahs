@@ -173,9 +173,11 @@
             android:layout_height="match_parent"
             android:layout_gravity="right|center_horizontal"
             android:layout_marginRight="50dp"
-            android:background="@drawable/round_button"
+
+            android:background="@color/purpose3"
             android:foreground="@drawable/btn_write_src"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            app:iconPadding="0dp" />
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -183,6 +185,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="left|center_horizontal"
             android:layout_marginLeft="50dp"
+            android:background="@color/white"
             android:src="@drawable/btn_back"
             android:text=""
             android:textSize="10sp" />

@@ -6,6 +6,8 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="@drawable/profilebackground"
+    android:scrollbarThumbHorizontal="@color/white"
+    android:scrollbarThumbVertical="@color/white"
     tools:context=".SendMessageActivity">
 
 
@@ -40,7 +42,8 @@
             android:gravity="center_horizontal"
             android:text="20_유준호_심컴"
             android:textColor="@color/black"
-            android:textSize="40sp" />
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
     </FrameLayout>
 
@@ -89,9 +92,11 @@
             android:layout_height="match_parent"
             android:layout_gravity="left|center_horizontal"
             android:layout_marginLeft="50dp"
+            android:background="@color/white"
             android:foreground="@drawable/btn_back"
             android:text=""
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            app:backgroundTint="@color/white" />
 
     </FrameLayout>
 

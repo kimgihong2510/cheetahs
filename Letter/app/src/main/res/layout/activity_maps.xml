@@ -29,5 +29,14 @@
             android:src="@drawable/btn_write_src" />
     </androidx.cardview.widget.CardView>
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="30px"
+        android:foreground="@drawable/image_overlay"
+        app:srcCompat="@drawable/helper" />
+
 
 </FrameLayout>
