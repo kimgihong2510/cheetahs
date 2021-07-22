@@ -315,7 +315,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 call: Call<Connect.messagemessage>,
                 response: Response<Connect.messagemessage>
             ) {
-                LetterList=response.body() as Connect.messagemessage
+                if(response.body()!=null)
+                    LetterList=response.body() as Connect.messagemessage
             }
 
         })
