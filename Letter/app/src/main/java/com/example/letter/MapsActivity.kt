@@ -24,10 +24,14 @@ import com.google.android.gms.maps.model.*
 import com.google.gson.GsonBuilder
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
+import java.sql.Types.NULL
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+    var LetterList : Connect.messagemessage = Connect.messagemessage(
+        listOf(Connect.dataforallMessage(id=0, lat="0", lon="0")), "")
+    lateinit var marker : List<Marker>
 
     private lateinit var mMap: GoogleMap
 
@@ -297,34 +301,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val api = retrofit.create(Connect.GETallMessage::class.java)!!
         var letters=api.allMessage()
 
-        letters.enqueue(object : Callback<Connect.messagemessage> {
-            override fun onResponse(
-                call: Call<Connect.messagemessage>,
-                response: Response<Connect.messagemessage>
-            ) {
-                var tmp=response.body() as Connect.messagemessage
-                println(tmp.data[1].id)
-            }
 
+        letters.enqueue(object : Callback<Connect.messagemessage> {
             override fun onFailure(call: Call<Connect.messagemessage>, t: Throwable) {
                 println("안됨")
                 //////////////
             }
+            override fun onResponse(
+                call: Call<Connect.messagemessage>,
+                response: Response<Connect.messagemessage>
+            ) {
+                LetterList=response.body() as Connect.messagemessage
+            }
+
         })
+        println(LetterList)
+        println(LetterList.data.size)
+        for(i in 0..(LetterList.data.size-1)){
+            var LetterCoordinate=LatLng(
+                (LetterList.data.get(i).lat).toDouble(),(LetterList.data.get(i).lon).toDouble())
 
 
-        api.allMessage()
-
-        var LetterCoordinate=CurrentCoordinate
-        var Lettermode="Throw"
-        var marker : Marker
-        if(CheckInRadius(LetterCoordinate) && Lettermode==ThrowCatchMode){ //던지는 모드이면 경대 안인지도 확인해줘야됨.
-            marker=mMap.addMarker(MarkerOptions()
-                .position(LetterCoordinate)
-                .title("5/7")
-                .snippet("3:15")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1)))
-            marker.showInfoWindow()
+            if(CheckInRadius(LetterCoordinate) && isPointInPolygon(LetterCoordinate, BorderArray)){
+                marker += (mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
+                    .position(LetterCoordinate)
+                ))
+                //marker.get(marker.size).showInfoWindow()
+            }
         }
     }
 

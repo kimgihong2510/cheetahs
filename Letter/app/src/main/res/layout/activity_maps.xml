@@ -21,7 +21,7 @@
         android:layout_margin="10dp"
         >
 
-        <Button
+<!--        <Button
             android:id="@+id/Throw"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -42,7 +42,7 @@
             android:text="낚을 쪽찌"
             android:textColor="#000000"
             app:backgroundTint="#00BCD4" />
-
+-->
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
