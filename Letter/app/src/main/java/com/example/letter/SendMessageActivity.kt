@@ -204,7 +204,7 @@ class SendMessageActivity : AppCompatActivity() {
         binding.ProfilePicture.setImageResource(R.drawable.ic_launcher_background)
 
         //프로필 사진, 프로필 눌리면 프로필 페이지로 연결'
-        binding.ProfilePicture.setOnClickListener{
+        /*binding.ProfilePicture.setOnClickListener{
             val nextIntent= Intent(this, ShowProfileActivity::class.java)
             nextIntent.putExtra("name",name)
             nextIntent.putExtra("number",number)
@@ -219,7 +219,7 @@ class SendMessageActivity : AppCompatActivity() {
             nextIntent.putExtra("major",major)
             nextIntent.putExtra("tact",tact)
             startActivity(nextIntent)
-        }
+        }*/
         binding.btnBack.setOnClickListener{
             val nextIntent = Intent(this, MapsActivity::class.java)
             nextIntent.putExtra("name",name)
@@ -227,6 +227,7 @@ class SendMessageActivity : AppCompatActivity() {
             nextIntent.putExtra("major",major)
             nextIntent.putExtra("tact",tact)
             startActivity(nextIntent)
+            finish()
         }
         binding.btnThrow.setOnClickListener{
             val nextIntent = Intent(this, MapsActivity::class.java)
@@ -252,7 +253,7 @@ class SendMessageActivity : AppCompatActivity() {
 
 
             startActivity(nextIntent)
-
+            finish()
 
 
             val retrofit = Retrofit.Builder()

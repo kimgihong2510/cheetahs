@@ -38,6 +38,7 @@ class ShowProfileActivity : AppCompatActivity()
             ToShowMessage.putExtra("major",major)
             ToShowMessage.putExtra("tact",tact)
             startActivity(ToShowMessage)
+            finish()
         };
     }
 }

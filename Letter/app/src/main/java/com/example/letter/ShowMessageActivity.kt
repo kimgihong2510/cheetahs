@@ -57,7 +57,6 @@ class ShowMessageActivity : AppCompatActivity() {
             nextIntent.putExtra("number",number)
             nextIntent.putExtra("major",major)
             nextIntent.putExtra("tact",tact)
-
             startActivity(nextIntent)
         }
 

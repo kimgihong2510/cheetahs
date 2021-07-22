@@ -116,6 +116,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             ToSendMessage.putExtra("lat",lat)//메인으로 정보 전달
             ToSendMessage.putExtra("lon",lon)//메인으로 정보 전달
             startActivity(ToSendMessage)
+            finish()
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -423,6 +424,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                     nextIntent.putExtra("cpymajor", major)
                     nextIntent.putExtra("cpytact", tact)
                     startActivity(nextIntent)
+                    finish()
                 }
 
                 break
