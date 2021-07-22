@@ -9,6 +9,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.letter.databinding.ActivitySendMessageBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SendMessageActivity : AppCompatActivity() {
@@ -115,6 +120,35 @@ class SendMessageActivity : AppCompatActivity() {
             nextIntent.putExtra("major",major)
             nextIntent.putExtra("tact",tact)
             startActivity(nextIntent)
+
+
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://25.61.78.177:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val api = retrofit.create(Connect.POSTsendMessage::class.java)!!
+
+
+
+
+
+            var letters=api.sendMessage("1", "1", "1", 2, 2,
+                "2020.01.01 06:01:22", "ㅎㅇㅎㅇ", "유준","2020333","전자공학과","0102233")
+
+            letters.enqueue(object : Callback<Connect.MessageParams> {
+                override fun onResponse(
+                    call: Call<Connect.MessageParams>,
+                    response: Response<Connect.MessageParams>
+                ) {
+                    Toast.makeText(this@SendMessageActivity, "전송되었습니다.", Toast.LENGTH_LONG).show()
+                }
+
+                override fun onFailure(call: Call<Connect.MessageParams>, t: Throwable) {
+                    Toast.makeText(this@SendMessageActivity, "메세지가 전송되지 않았습니다.", Toast.LENGTH_LONG).show()
+                    //////////////
+                }
+            })
         }
     }
 }

@@ -288,10 +288,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun ShowLetter() : Unit{
+        ////모든 쪽지 받아오기
         val retrofit = Retrofit.Builder()
             .baseUrl("http://25.61.78.177:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
         val api = retrofit.create(Connect.GETallMessage::class.java)!!
         var letters=api.allMessage()
 
@@ -301,7 +303,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 response: Response<Connect.messagemessage>
             ) {
                 var tmp=response.body() as Connect.messagemessage
-                println("${response.body()}")
+                println(tmp.data[1].id)
             }
 
             override fun onFailure(call: Call<Connect.messagemessage>, t: Throwable) {
@@ -309,6 +311,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 //////////////
             }
         })
+
+
         api.allMessage()
 
         var LetterCoordinate=CurrentCoordinate

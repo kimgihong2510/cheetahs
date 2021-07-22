@@ -3,10 +3,7 @@ package com.example.letter
 import android.os.Message
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 class Connect {
     val Urlbase="naver.com"
@@ -15,8 +12,8 @@ class Connect {
         val `data`: List<dataforallMessage>,
         val message: String
     )
+
     data class MessageParams(
-        var id: Int =0,
         var lat: String ="",
         var lon: String ="",
         var cat: String ="",
@@ -47,20 +44,21 @@ class Connect {
     }
 
     interface POSTsendMessage{
+        @FormUrlEncoded
         @POST("/sendMessage")
         fun sendMessage(
             @Field("lat") lat: String,
             @Field("lon") lon: String,
-            @Field("cat") cat: Int,
+            @Field("cat") cat: String,
             @Field("cnt") cmt: Int,
-            @Field("saw") saw: String,
+            @Field("saw") saw: Int,
             @Field("eti") eti: String,
             @Field("text") text: String,
             @Field("name") name: String,
             @Field("number") number: String,
             @Field("major") major: String,
             @Field("tact") tact: String,
-        ): Call<String>
+        ): Call<MessageParams>
     }
 
     interface GETshowMessage{
