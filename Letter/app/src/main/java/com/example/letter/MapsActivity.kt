@@ -20,6 +20,9 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -342,25 +345,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
             if(CheckInRadius(LetterCoordinate) && isPointInPolygon(LetterCoordinate, BorderArray)){
 
+                var date = Date()
+                var dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("ko","KR"))
+                var calendar = Calendar.getInstance()
+                calendar.setTime(date)
+
+                var stringDate = LetterList.data.get(i).eti
+                var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                var dt = formatter.parse(stringDate)
+
+                var calcuHour = (dt.time - date.time) / (60*60*1000)
+                println(dt.time - date.time)
+                var calcuMin = ((dt.time - date.time) % (60*60*1000)) / (60*1000)
+
+
                 when(LetterList.data.get(i).cat) {
                     "친목"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                         .position(LetterCoordinate)
-                        .title(LetterList.data.get(i).eti)
+                        .title("$calcuHour:$calcuMin")
                         .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1)))
                     "멘토"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                         .position(LetterCoordinate)
-                        .title(LetterList.data.get(i).eti)
+                        .title("$calcuHour:$calcuMin")
                         .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose2)))
                     "멘티"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                         .position(LetterCoordinate)
-                        .title(LetterList.data.get(i).eti)
+                        .title("$calcuHour:$calcuMin")
                         .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose3)))
                     "친목"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                         .position(LetterCoordinate)
-                        .title(LetterList.data.get(i).eti)
+                        .title("$calcuHour:$calcuMin")
                         .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose4)))
                 }
