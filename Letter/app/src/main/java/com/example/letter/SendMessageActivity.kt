@@ -37,12 +37,12 @@ class SendMessageActivity : AppCompatActivity() {
         this.lon = intent.getStringExtra("lon").toString()
 
         var cat : String = ""
-        var cnt : Int = 0
+        var cnt : Int = 5
         var saw : Int = 0
         var eti : String = ""
         var tex : String = ""
         var hour:Int = 0
-        var min:Int = 0
+        var min:Int = 30
 
         if(major.contains("컴퓨터"))
             major = "컴학"
@@ -170,10 +170,12 @@ class SendMessageActivity : AppCompatActivity() {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale("ko","KR"))
             val calendar = Calendar.getInstance()
             calendar.setTime(date)
-
+            println(min)
+            println("//////////")
+            println(dateFormat.format(calendar.time))
             calendar.add(Calendar.HOUR,hour)
             calendar.add(Calendar.MINUTE,min)
-
+            println(dateFormat.format(calendar.time))
             val eti :String = dateFormat.format(calendar.time)//서버에 넘어갈 시간 변수 string
 
 
@@ -190,7 +192,6 @@ class SendMessageActivity : AppCompatActivity() {
             tex = binding.letter.text.toString();
 
             var letters=api.sendMessage(lat, lon, cat, cnt, saw, eti, tex, name,number,major,tact) /*eti 형식은 "2020.01.01 06:01:22"*/
-
             println(lat)
             println(lon)
             println(cat)
