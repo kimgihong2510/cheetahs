@@ -75,7 +75,7 @@ class SendMessageActivity : AppCompatActivity() {
 
         binding.PersonPicker.setOnValueChangedListener { numberPicker, i, i2 ->
             when{
-                i2 == 0 -> cnt = 0;
+                i2 == 0 -> cnt = 100000;
                 i2 == 1 -> cnt = 1;
                 i2 == 2 -> cnt = 2;
                 i2 == 3 -> cnt = 3;
