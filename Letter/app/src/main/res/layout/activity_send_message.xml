@@ -164,20 +164,23 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_throw"
             android:layout_width="65dp"
             android:layout_height="match_parent"
             android:layout_gravity="right|center_horizontal"
-            android:background="@drawable/round_button"
             android:layout_marginRight="50dp"
+            android:background="@drawable/round_button"
             android:text="던지기"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
+
         <Button
+            android:id="@+id/btn_back"
             android:layout_width="65dp"
             android:layout_height="match_parent"
             android:layout_gravity="left|center_horizontal"
             android:layout_marginLeft="50dp"
             android:text=""
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
     </FrameLayout>
 
