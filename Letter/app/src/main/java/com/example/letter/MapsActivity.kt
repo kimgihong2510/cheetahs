@@ -90,7 +90,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         this.number = intent.getStringExtra("number").toString()
         this.tact = intent.getStringExtra("tact").toString()
 
-
+        var lat : String = ""   //현재위치로 설정되게 해야함
+        var lon : String = ""
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -98,10 +99,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.Write.setOnClickListener{
             val ToSendMessage= Intent(this,SendMessageActivity::class.java)
+            lat = CurrentCoordinate.latitude.toString()
+            lon = CurrentCoordinate.longitude.toString()
             ToSendMessage.putExtra("name",name)//메인으로 정보 전달
             ToSendMessage.putExtra("number",number)//메인으로 정보 전달
             ToSendMessage.putExtra("major",major)//메인으로 정보 전달
             ToSendMessage.putExtra("tact",tact)//메인으로 정보 전달
+            ToSendMessage.putExtra("lat",lat)//메인으로 정보 전달
+            ToSendMessage.putExtra("lon",lon)//메인으로 정보 전달
             startActivity(ToSendMessage)
         }
 

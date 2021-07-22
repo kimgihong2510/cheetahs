@@ -22,6 +22,8 @@ class SendMessageActivity : AppCompatActivity() {
     private lateinit var major:String
     private lateinit var name:String
     private lateinit var tact:String
+    private lateinit var lat:String
+    private lateinit var lon:String
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,14 @@ class SendMessageActivity : AppCompatActivity() {
         this.number = intent.getStringExtra("number").toString()
         this.major = intent.getStringExtra("major").toString()
         this.tact = intent.getStringExtra("tact").toString()
+        this.lat = intent.getStringExtra("lat").toString()
+        this.lon = intent.getStringExtra("lon").toString()
+
+        var cat : String = ""
+        var cnt : Int = 0
+        var saw : Int = 0
+        var eti : String = ""
+        var tex : String = ""
 
         if(major.contains("컴퓨터"))
             major = "컴학"
@@ -59,6 +69,29 @@ class SendMessageActivity : AppCompatActivity() {
         binding.MinPicker.minValue=0
         binding.MinPicker.maxValue=59
 
+        binding.PersonPicker.setOnValueChangedListener { numberPicker, i, i2 ->
+            when{
+                i2 == 0 -> cnt = 0;
+                i2 == 1 -> cnt = 1;
+                i2 == 2 -> cnt = 2;
+                i2 == 3 -> cnt = 3;
+                i2 == 4 -> cnt = 4;
+                i2 == 5 -> cnt = 5;
+                i2 == 6 -> cnt = 6;
+                i2 == 7 -> cnt = 7;
+                i2 == 8 -> cnt = 8;
+                i2 == 9 -> cnt = 9;
+                i2 == 10 -> cnt = 10;
+            }
+        }
+
+        binding.HourPicker.setOnValueChangedListener { numberPicker, i, i2 ->
+            //eti의 시 부분 : 현재 시 + i2           유준호 생각: 3600*i2 해서 시간 전체 다 잡고, db에 올리기 전에 원하는 형태로 바꾸는 것이 쉬울듯
+        }
+        binding.MinPicker.setOnValueChangedListener { numberPicker, i, i2 ->
+            //eti의 분 부분 : 현재 분 + i2
+        }
+
         //쪽찌 종류
         val purpose= arrayOf("친목", "멘토", "멘티", "취준")
         val myAdapter=ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, purpose)
@@ -68,13 +101,21 @@ class SendMessageActivity : AppCompatActivity() {
         binding.SetColor.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if(id.toInt()==0){
-                    binding.letter.setBackgroundResource(R.color.purpose1)}
+                    binding.letter.setBackgroundResource(R.color.purpose1)
+                    cat = "친목"
+                }
                 if(id.toInt()==1){
-                    binding.letter.setBackgroundResource(R.color.purpose2)}
+                    binding.letter.setBackgroundResource(R.color.purpose2)
+                    cat = "멘토"
+                }
                 if(id.toInt()==2){
-                    binding.letter.setBackgroundResource(R.color.purpose3)}
+                    binding.letter.setBackgroundResource(R.color.purpose3)
+                    cat = "멘티"
+                }
                 if(id.toInt()==3){
-                    binding.letter.setBackgroundResource(R.color.purpose4)}
+                    binding.letter.setBackgroundResource(R.color.purpose4)
+                    cat = "취준"
+                }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -129,12 +170,21 @@ class SendMessageActivity : AppCompatActivity() {
                 .build()
             val api = retrofit.create(Connect.POSTsendMessage::class.java)!!
 
+            tex = binding.letter.text.toString();
 
+            var letters=api.sendMessage(lat, lon, cat, cnt, saw, eti, tex, name,number,major,tact) /*eti 형식은 "2020.01.01 06:01:22"*/
 
-
-
-            var letters=api.sendMessage("1", "1", "1", 2, 2,
-                "2020.01.01 06:01:22", "ㅎㅇㅎㅇ", "유준","2020333","전자공학과","0102233")
+            println(lat)
+            println(lon)
+            println(cat)
+            println(cnt)
+            println(saw)
+            println(eti)
+            println(tex)
+            println(name)
+            println(number)
+            println(major)
+            println(tact)
 
             letters.enqueue(object : Callback<Connect.MessageParams> {
                 override fun onResponse(

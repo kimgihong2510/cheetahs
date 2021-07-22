@@ -14,6 +14,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ShowMessageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityShowMessageBinding
 
+    var lat: String = ""
+    var lon: String = ""
+    var cat: String = ""
+    var cnt: Int = 0
+    var saw: Int = 0
+    var eti: String = ""
+    var tex: String = ""
+    var name: String = ""
+    var number: String = ""
+    var major: String = ""
+    var tact: String = ""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,6 +61,18 @@ class ShowMessageActivity : AppCompatActivity() {
             ) {
                 var tmp=response.body() as Connect.ShowMessageStruct
                 println(tmp.data[1].id)
+                lat = tmp.data[1].lat
+                lon = tmp.data[1].lon
+                cat = tmp.data[1].cat
+                cnt = tmp.data[1].cnt
+                saw = tmp.data[1].saw
+                eti = tmp.data[1].eti
+                tex = tmp.data[1].tex
+                name = tmp.data[1].name
+                number = tmp.data[1].number
+                major = tmp.data[1].major
+                tact = tmp.data[1].tact
+
             }
 
             override fun onFailure(call: Call<Connect.ShowMessageStruct>, t: Throwable) {
