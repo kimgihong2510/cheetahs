@@ -271,35 +271,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
 
 
-    private fun isPointInPolygon(tap: LatLng, vertices: ArrayList<LatLng>): Boolean {
-        var intersectCount = 0
-        for (j in 0 until vertices.size - 1) {
-            if (rayCastIntersect(tap, vertices[j], vertices[j + 1])) {
-                intersectCount++
-            }
-        }
-        return intersectCount % 2 == 1 // odd = inside, even = outside;
-    }
-
-    private fun rayCastIntersect(tap: LatLng, vertA: LatLng, vertB: LatLng): Boolean {
-        val aY = vertA.latitude
-        val bY = vertB.latitude
-        val aX = vertA.longitude
-        val bX = vertB.longitude
-        val pY = tap.latitude
-        val pX = tap.longitude
-        if (aY > pY && bY > pY || aY < pY && bY < pY
-            || aX < pX && bX < pX
-        ) {
-            return false // a and b can't both be above or below pt.y, and a or
-            // b must be east of pt.x
-        }
-        val m = (aY - bY) / (aX - bX) // Rise over run
-        val bee = -aX * m + aY // y = mx + b
-        val x = (pY - bee) / m // algebra is neat!
-        return x > pX
-    }
-
 
     fun ShowLetter() : Unit{
         ////모든 쪽지 받아오기
@@ -332,6 +303,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         var duration=marker.size-1
         for(i in 0..duration){
             marker[i].remove()
+            println(i)
         }
 
         marker= listOf()
@@ -342,8 +314,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             var LetterCoordinate=LatLng(
                 (LetterList.data.get(i).lat).toDouble(),(LetterList.data.get(i).lon).toDouble())
 
-
-            if(CheckInRadius(LetterCoordinate) && isPointInPolygon(LetterCoordinate, BorderArray)){
+            if(CheckInRadius(LetterCoordinate)){
 
                 var date = Date()
                 var dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("ko","KR"))
@@ -359,26 +330,31 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 var calcuMin = ((dt.time - date.time) % (60*60*1000)) / (60*1000)
 
 
+                var string=(LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).cnt.toString())
+                if(LetterList.data.get(i).cnt==100000){
+                    string="제한 없음"
+                }
+
                 when(LetterList.data.get(i).cat) {
                     "친목"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                         .position(LetterCoordinate)
                         .title("$calcuHour:$calcuMin")
-                        .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
+                        .snippet(string)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1)))
                     "멘토"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                         .position(LetterCoordinate)
                         .title("$calcuHour:$calcuMin")
-                        .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
+                        .snippet(string)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose2)))
                     "멘티"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                         .position(LetterCoordinate)
                         .title("$calcuHour:$calcuMin")
-                        .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
+                        .snippet(string)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose3)))
-                    "친목"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
+                    "취준"->marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                         .position(LetterCoordinate)
                         .title("$calcuHour:$calcuMin")
-                        .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
+                        .snippet(string)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose4)))
                 }
                 markerID+=LetterList.data.get(i).id

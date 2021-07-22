@@ -112,7 +112,12 @@ class ShowMessageActivity : AppCompatActivity() {
                 tact = tmp.data[0].tact
 
                 //get한 data를 화면에 표시
-                binding.PersonPicker.setText("$saw / $cnt")
+                if(cnt == 100000) {
+                    binding.PersonPicker.setText("제한 없음")
+                }
+                else{
+                    binding.PersonPicker.setText("$saw / $cnt")
+                }
                 binding.SetColor.setText(cat)
                 when(cat){
                     "친목" -> binding.letter.setBackgroundColor(getResources().getColor(R.color.purpose1))

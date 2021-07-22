@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.letter.databinding.ActivitySendMessageBinding
+import com.google.android.gms.maps.model.LatLng
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +20,65 @@ import java.util.*
 
 
 class SendMessageActivity : AppCompatActivity() {
+    /////경대안 확인
+    private fun isPointInPolygon(tap: LatLng, vertices: ArrayList<LatLng>): Boolean {
+        var intersectCount = 0
+        for (j in 0 until vertices.size - 1) {
+            if (rayCastIntersect(tap, vertices[j], vertices[j + 1])) {
+                intersectCount++
+            }
+        }
+        return intersectCount % 2 == 1 // odd = inside, even = outside;
+    }
+
+    private fun rayCastIntersect(tap: LatLng, vertA: LatLng, vertB: LatLng): Boolean {
+        val aY = vertA.latitude
+        val bY = vertB.latitude
+        val aX = vertA.longitude
+        val bX = vertB.longitude
+        val pY = tap.latitude
+        val pX = tap.longitude
+        if (aY > pY && bY > pY || aY < pY && bY < pY
+            || aX < pX && bX < pX
+        ) {
+            return false // a and b can't both be above or below pt.y, and a or
+            // b must be east of pt.x
+        }
+        val m = (aY - bY) / (aX - bX) // Rise over run
+        val bee = -aX * m + aY // y = mx + b
+        val x = (pY - bee) / m // algebra is neat!
+        return x > pX
+    }
+    val BorderArray = arrayListOf(
+        LatLng(35.889540, 128.603830)
+        ,LatLng(35.888454, 128.603830)
+        ,LatLng(35.886672, 128.604828)
+        ,LatLng(35.886401, 128.607551)
+        ,LatLng(35.886058, 128.607506)
+        ,LatLng(35.885795, 128.607842)
+        ,LatLng(35.885744, 128.608309)
+        ,LatLng(35.885417, 128.608756)
+        ,LatLng(35.885313, 128.609412)
+        ,LatLng(35.885654, 128.609570)
+        ,LatLng(35.885682, 128.609947)
+        ,LatLng(35.886272, 128.609987)
+        ,LatLng(35.886174, 128.612861)
+        ,LatLng(35.885498, 128.613825)
+        ,LatLng(35.884895, 128.614136)
+        ,LatLng(35.885571, 128.615380)
+        ,LatLng(35.888731, 128.616920)
+        ,LatLng(35.890126, 128.616177)
+        ,LatLng(35.894846, 128.613726)
+        ,LatLng(35.895387, 128.614280)
+        ,LatLng(35.895725, 128.613741)
+        ,LatLng(35.895854, 128.613119)
+        ,LatLng(35.892524, 128.609283)
+        ,LatLng(35.889688, 128.603978)
+    )
+
+
+
+
     private lateinit var binding: ActivitySendMessageBinding
     private lateinit var number:String
     private lateinit var major:String
@@ -35,6 +95,18 @@ class SendMessageActivity : AppCompatActivity() {
         this.tact = intent.getStringExtra("tact").toString()
         this.lat = intent.getStringExtra("lat").toString()
         this.lon = intent.getStringExtra("lon").toString()
+
+        if(!(isPointInPolygon(LatLng(lat.toDouble(), lon.toDouble()), BorderArray))){
+
+            Toast.makeText(this, "경북대 밖에서는 쪽찌를 던질 수 없습니다.", Toast.LENGTH_LONG).show()
+            val nextIntent = Intent(this, MapsActivity::class.java)
+            nextIntent.putExtra("name",name)
+            nextIntent.putExtra("number",number)
+            nextIntent.putExtra("major",major)
+            nextIntent.putExtra("tact",tact)
+            startActivity(nextIntent)
+        }
+
 
         var cat : String = ""
         var cnt : Int = 5
@@ -64,7 +136,7 @@ class SendMessageActivity : AppCompatActivity() {
         //인원수, 시간, 분 롤
         binding.PersonPicker.minValue=0
         binding.PersonPicker.maxValue=10
-        val arrayPicker= arrayOf("5명", "6명", "7명", "8명", "9명", "10명", "1명", " 2명", "3명", "4명", "제한없음")
+        val arrayPicker= arrayOf("5명", "6명", "7명", "8명", "9명", "10명", "제한없음", "1명", " 2명", "3명", "4명")
         binding.PersonPicker.displayedValues= arrayPicker
 
         binding.HourPicker.minValue=0
@@ -82,11 +154,11 @@ class SendMessageActivity : AppCompatActivity() {
                 i2 == 3 -> cnt = 8;
                 i2 == 4 -> cnt = 9;
                 i2 == 5 -> cnt = 10;
-                i2 == 6 -> cnt = 1;
-                i2 == 7 -> cnt = 2;
-                i2 == 8 -> cnt = 3;
-                i2 == 9 -> cnt = 4;
-                i2 == 10 -> cnt = 100000;
+                i2 == 6 -> cnt = 100000;
+                i2 == 7 -> cnt = 1;
+                i2 == 8 -> cnt = 2;
+                i2 == 9 -> cnt = 3;
+                i2 == 10 -> cnt = 4;
             }
         }
 
