@@ -175,7 +175,6 @@
             android:layout_marginRight="50dp"
             android:background="@drawable/round_button"
             android:foreground="@drawable/btn_write_src"
-            android:shadowDx="@dimen/cardview_compat_inset_shadow"
             android:textSize="10sp" />
 
         <ImageButton

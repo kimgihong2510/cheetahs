@@ -101,6 +101,7 @@ class LoginActivity : AppCompatActivity()
             ToMaps.putExtra("major",major)//메인으로 정보 전달
             ToMaps.putExtra("tact",tact)//메인으로 정보 전달
             startActivity(ToMaps)//버튼이 눌리면 로그인 이후 화면으로 이동
+            finish()
         }
     }
 }
