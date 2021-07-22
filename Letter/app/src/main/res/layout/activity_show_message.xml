@@ -153,22 +153,21 @@
         />
 
     <TextView
+        android:id="@+id/letter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/ButtonSection"
+        android:layout_below="@+id/SetColor"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_below="@+id/SetColor"
+        android:background="@color/purpose4"
         android:gravity="top|left"
         android:padding="10dp"
-        android:layout_above="@id/ButtonSection"
-        android:id="@+id/letter"
-        android:text="나이스"
-        android:textSize="18sp"
         android:textColor="@color/black"
-        android:background="@color/purpose4"/>
+        android:textSize="18sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
