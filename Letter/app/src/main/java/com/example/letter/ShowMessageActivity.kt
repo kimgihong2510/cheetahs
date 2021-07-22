@@ -81,10 +81,7 @@ class ShowMessageActivity : AppCompatActivity() {
         println(id)
         val api = retrofit.create(Connect.GETshowMessage::class.java)!!
         var letters=api.showMessage(id.toString()) // message ID            //id 값 받아오는걸로 수정
-        println(id)
-        println(id)
-        println(id)
-        println(id)
+
         letters.enqueue(object : Callback<Connect.ShowMessageStruct> {
             override fun onResponse(
                 call: Call<Connect.ShowMessageStruct>,
@@ -120,6 +117,28 @@ class ShowMessageActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Connect.ShowMessageStruct>, t: Throwable) {
+                println("안됨")
+                //////////////
+            }
+        })
+
+        val retrofit2 = Retrofit.Builder()
+            .baseUrl("http://25.61.78.177:8080/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        var api2 = retrofit.create(Connect.POSTupdatesaw::class.java)!!
+        var letters2=api2.updateSaw(id.toString()) // message ID            //id 값 받아오는걸로 수정
+
+        letters2.enqueue(object : Callback<Connect.POSTupdatestruct> {
+            override fun onResponse(
+                call: Call<Connect.POSTupdatestruct>,
+                response: Response<Connect.POSTupdatestruct>
+            ) {
+                println(response.body())
+                println(response)
+            }
+
+            override fun onFailure(call: Call<Connect.POSTupdatestruct>, t: Throwable) {
                 println("안됨")
                 //////////////
             }
