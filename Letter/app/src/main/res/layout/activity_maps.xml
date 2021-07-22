@@ -41,21 +41,20 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/Write"
+    <androidx.cardview.widget.CardView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="bottom|right"
         android:layout_margin="10dp"
-        android:src="@drawable/ic_launcher_foreground" />
-
-    <ImageButton
-        android:id="@+id/refresh"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="top|right"
-        android:layout_margin="10dp"
         android:padding="5dp"
-        android:src="@drawable/ic_launcher_background" />
+        app:cardCornerRadius="50dp">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/Write"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/btn_write_src" />
+    </androidx.cardview.widget.CardView>
+
 
 </FrameLayout>
