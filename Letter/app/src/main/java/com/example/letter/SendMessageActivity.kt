@@ -64,7 +64,7 @@ class SendMessageActivity : AppCompatActivity() {
         //인원수, 시간, 분 롤
         binding.PersonPicker.minValue=0
         binding.PersonPicker.maxValue=10
-        val arrayPicker= arrayOf("제한 없음", "1명", "2명", "3명", "4명", "5명", "6명", " 7명", "8명", "9명", "10명")
+        val arrayPicker= arrayOf("5명", "6명", "7명", "8명", "9명", "10명", "1명", " 2명", "3명", "4명", "제한없음")
         binding.PersonPicker.displayedValues= arrayPicker
 
         binding.HourPicker.minValue=0
@@ -72,20 +72,21 @@ class SendMessageActivity : AppCompatActivity() {
 
         binding.MinPicker.minValue=0
         binding.MinPicker.maxValue=59
+        binding.MinPicker.value=30
 
         binding.PersonPicker.setOnValueChangedListener { numberPicker, i, i2 ->
             when{
-                i2 == 0 -> cnt = 0;
-                i2 == 1 -> cnt = 1;
-                i2 == 2 -> cnt = 2;
-                i2 == 3 -> cnt = 3;
-                i2 == 4 -> cnt = 4;
-                i2 == 5 -> cnt = 5;
-                i2 == 6 -> cnt = 6;
-                i2 == 7 -> cnt = 7;
-                i2 == 8 -> cnt = 8;
-                i2 == 9 -> cnt = 9;
-                i2 == 10 -> cnt = 10;
+                i2 == 0 -> cnt = 5;
+                i2 == 1 -> cnt = 6;
+                i2 == 2 -> cnt = 7;
+                i2 == 3 -> cnt = 8;
+                i2 == 4 -> cnt = 9;
+                i2 == 5 -> cnt = 10;
+                i2 == 6 -> cnt = 1;
+                i2 == 7 -> cnt = 2;
+                i2 == 8 -> cnt = 3;
+                i2 == 9 -> cnt = 4;
+                i2 == 10 -> cnt = 100000;
             }
         }
 
