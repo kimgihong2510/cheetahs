@@ -1,8 +1,10 @@
 package com.example.letter
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import com.example.letter.databinding.ActivitySendMessageBinding
 import com.example.letter.databinding.ActivityShowMessageBinding
 import retrofit2.Call
@@ -10,6 +12,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class ShowMessageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityShowMessageBinding
@@ -84,6 +90,7 @@ class ShowMessageActivity : AppCompatActivity() {
         var letters=api.showMessage(id.toString()) // message ID            //id 값 받아오는걸로 수정
 
         letters.enqueue(object : Callback<Connect.ShowMessageStruct> {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onResponse(
                 call: Call<Connect.ShowMessageStruct>,
                 response: Response<Connect.ShowMessageStruct>
@@ -114,8 +121,23 @@ class ShowMessageActivity : AppCompatActivity() {
                     "취준" -> binding.letter.setBackgroundColor(getResources().getColor(R.color.purpose4))
                 }
                 binding.letter.setText("$text");
-                println("text : $text")
                 binding.Profile.setText(number.substring(2,4)+"_"+name.substring(0,3)+"_"+major)
+
+                var date = Date()
+                var dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("ko","KR"))
+                var calendar = Calendar.getInstance()
+                calendar.setTime(date)
+
+                var stringDate = eti;
+                var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                var dt = formatter.parse(stringDate);
+
+                var calcuHour = (dt.time - date.time) / (60*60*1000)
+                println(dt.time - date.time)
+                var calcuMin = ((dt.time - date.time) % (60*60*1000)) / (60*1000)
+
+                binding.HourPicker.setText(calcuHour.toString());
+                binding.MinPicker.setText(calcuMin.toString());
             }
 
             override fun onFailure(call: Call<Connect.ShowMessageStruct>, t: Throwable) {
