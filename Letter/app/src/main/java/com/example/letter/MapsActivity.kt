@@ -96,12 +96,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
 
-        binding.Throw.setOnClickListener {
-            ThrowCatchMode="Catch"
-        }
-        binding.Catch.setOnClickListener {
-            ThrowCatchMode="Throw"
-        }
         binding.Write.setOnClickListener{
             val ToSendMessage= Intent(this,SendMessageActivity::class.java)
             ToSendMessage.putExtra("name",name)//메인으로 정보 전달
