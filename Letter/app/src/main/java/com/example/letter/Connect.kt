@@ -86,7 +86,7 @@ class Connect {
     interface POSTupdatesaw{
         @POST("/updateSaw/{messageID}")
         fun updateSaw(
-            @Path("messageID") messageId:String
+            @Path("messageID") messageID:String
         ): Call<POSTupdatestruct>
     }
     data class POSTupdatestruct(
