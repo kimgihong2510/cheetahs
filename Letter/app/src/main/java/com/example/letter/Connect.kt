@@ -31,6 +31,10 @@ class Connect {
         var id: Int =0,
         var lat: String ="",
         var lon: String ="",
+        var cat: String="",
+        var cnt: Int=0,
+        var saw: Int=0,
+        var eti: String
     )
 
     data class ShowMessageStruct(

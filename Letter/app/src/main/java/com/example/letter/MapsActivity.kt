@@ -26,13 +26,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     val KNU = LatLng(35.888166756477105, 128.61056411139742)
     var LetterList : Connect.messagemessage = Connect.messagemessage(
-        listOf(Connect.dataforallMessage(id=0, lat="0", lon="0")), "")
+        listOf(Connect.dataforallMessage(id=0, lat="0", lon="0", cat="", cnt=0, saw=0, eti="")), "")
     private lateinit var mMap: GoogleMap
 
     var marker : List<Marker> = listOf()
     var markerID : List<Int> = listOf()
 
 
+    var flag : Int = 0
+    var lastTouchTime :  Long= 0
+    var currentTouchTime : Long = 0
 
     var ThrowCatchMode="Throw"
 
@@ -331,6 +334,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         marker= listOf()
         markerID=listOf()
 
+
         for(i in 0..(LetterList.data.size-1)){
             var LetterCoordinate=LatLng(
                 (LetterList.data.get(i).lat).toDouble(),(LetterList.data.get(i).lon).toDouble())
@@ -339,26 +343,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             if(CheckInRadius(LetterCoordinate) && isPointInPolygon(LetterCoordinate, BorderArray)){
                 marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                     .position(LetterCoordinate)
+                    .title(LetterList.data.get(i).eti)
+                    .snippet((LetterList.data.get(i).saw.toString() + "/" + LetterList.data.get(i).saw.toString()))
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1))
                 )
-                //marker.get(marker.size).showInfoWindow()
-            }
-        }
-        println(marker)
-        for(i in 0..(LetterList.data.size-1)){
-            var LetterCoordinate=LatLng(
-                (LetterList.data.get(i).lat).toDouble(),(LetterList.data.get(i).lon).toDouble())
-
-
-            if(CheckInRadius(LetterCoordinate) && isPointInPolygon(LetterCoordinate, BorderArray)){
-                marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
-                    .position(LetterCoordinate)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1))
-                )
+                println(i)
                 markerID+=LetterList.data.get(i).id
-                //marker.get(marker.size).showInfoWindow()
+
             }
         }
+
     }
 
 
@@ -400,22 +394,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-        var flag : Int = 0
+
+        lastTouchTime = currentTouchTime
+        currentTouchTime = System.currentTimeMillis().toLong()
+
+        println(lastTouchTime)
+        println(currentTouchTime)
+
         for (i in 0..(marker.size - 1)) {
             if (p0 == marker[i]) {
                 flag = i
+
+                if (currentTouchTime - lastTouchTime < 400 && i == flag) {
+                    lastTouchTime=0
+                    currentTouchTime=0
+                    val nextIntent= Intent(this, ShowMessageActivity::class.java)
+                    nextIntent.putExtra("id", markerID[flag].toString())
+                    nextIntent.putExtra("cpyname", name)
+                    nextIntent.putExtra("cpynumber", number)
+                    nextIntent.putExtra("cpymajor", major)
+                    nextIntent.putExtra("cpytact", tact)
+                    startActivity(nextIntent)
+                }
+
                 break
             }
         }
-        println(markerID[flag])
 
-        val nextIntent= Intent(this, ShowMessageActivity::class.java)
-        nextIntent.putExtra("id", markerID[flag].toString())
-        nextIntent.putExtra("cpyname", name)
-        nextIntent.putExtra("cpynumber", number)
-        nextIntent.putExtra("cpymajor", major)
-        nextIntent.putExtra("cpytact", tact)
-        startActivity(nextIntent)
+        marker[flag].showInfoWindow()
+
+
+
+
         return true
     }
 }
