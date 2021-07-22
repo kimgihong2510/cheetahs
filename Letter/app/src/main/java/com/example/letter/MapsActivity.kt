@@ -87,6 +87,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        CurrentCoordinate=KNU
+
         this.name = intent.getStringExtra("name").toString()
         this.major = intent.getStringExtra("major").toString()
         this.number = intent.getStringExtra("number").toString()

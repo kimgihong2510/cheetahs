@@ -14,6 +14,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class SendMessageActivity : AppCompatActivity() {
@@ -39,6 +41,8 @@ class SendMessageActivity : AppCompatActivity() {
         var saw : Int = 0
         var eti : String = ""
         var tex : String = ""
+        var hour:Int = 0
+        var min:Int = 0
 
         if(major.contains("컴퓨터"))
             major = "컴학"
@@ -86,10 +90,10 @@ class SendMessageActivity : AppCompatActivity() {
         }
 
         binding.HourPicker.setOnValueChangedListener { numberPicker, i, i2 ->
-            //eti의 시 부분 : 현재 시 + i2           유준호 생각: 3600*i2 해서 시간 전체 다 잡고, db에 올리기 전에 원하는 형태로 바꾸는 것이 쉬울듯
+            hour =i2
         }
         binding.MinPicker.setOnValueChangedListener { numberPicker, i, i2 ->
-            //eti의 분 부분 : 현재 분 + i2
+            min =i2
         }
 
         //쪽찌 종류
@@ -160,6 +164,17 @@ class SendMessageActivity : AppCompatActivity() {
             nextIntent.putExtra("number",number)
             nextIntent.putExtra("major",major)
             nextIntent.putExtra("tact",tact)
+
+            val date = Date()
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale("ko","KR"))
+            val calendar = Calendar.getInstance()
+            calendar.setTime(date)
+
+            calendar.add(Calendar.HOUR,hour)
+            calendar.add(Calendar.MINUTE,min)
+
+            val eti :String = dateFormat.format(calendar.time)//서버에 넘어갈 시간 변수 string
+
             startActivity(nextIntent)
 
 
