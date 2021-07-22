@@ -71,6 +71,7 @@ class ShowMessageActivity : AppCompatActivity() {
             nextIntent.putExtra("major", cpymajor)
             nextIntent.putExtra("tact", cpytact)
             startActivity(nextIntent)
+            finish()
         }
 
         val retrofit = Retrofit.Builder()
@@ -112,7 +113,7 @@ class ShowMessageActivity : AppCompatActivity() {
                     "멘티" -> binding.letter.setBackgroundColor(getResources().getColor(R.color.purpose3))
                     "취준" -> binding.letter.setBackgroundColor(getResources().getColor(R.color.purpose4))
                 }
-                binding.letter.setText(tex)
+                binding.letter.setText(tex);
                 binding.Profile.setText(number.substring(2,4)+"_"+name.substring(0,3)+"_"+major)
             }
 
