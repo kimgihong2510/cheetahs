@@ -95,7 +95,7 @@ class ShowMessageActivity : AppCompatActivity() {
                 lon = tmp.data[0].lon
                 cat = tmp.data[0].cat
                 cnt = tmp.data[0].cnt
-                saw = tmp.data[0].saw
+                saw = tmp.data[0].saw+1
                 eti = tmp.data[0].eti
                 tex = tmp.data[0].tex
                 name = tmp.data[0].name
