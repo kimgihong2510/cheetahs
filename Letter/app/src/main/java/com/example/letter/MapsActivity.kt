@@ -30,6 +30,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     val KNU = LatLng(35.888166756477105, 128.61056411139742)
     var LetterList : Connect.messagemessage = Connect.messagemessage(
         listOf(Connect.dataforallMessage(id=0, lat="0", lon="0", cat="", cnt=0, saw=0, eti="")), "")
+
+    var LetterListflag =0
     private lateinit var mMap: GoogleMap
 
     var marker : List<Marker> = listOf()
@@ -293,23 +295,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 call: Call<Connect.messagemessage>,
                 response: Response<Connect.messagemessage>
             ) {
-                if(response.body()!=null)
-                    LetterList=response.body() as Connect.messagemessage
+                if(response.body()!=null) {
+                    LetterList = response.body() as Connect.messagemessage
+                    println(response.body())
+                }
+                else{
+                    LetterListflag=1
+                }
             }
 
         })
         println(LetterList)
-        println(LetterList.data.size)
 
         var duration=marker.size-1
         for(i in 0..duration){
             marker[i].remove()
             println(i)
+            println(11111111)
         }
+
+        println(marker)
 
         marker= listOf()
         markerID=listOf()
 
+        if(LetterListflag==1){
+            LetterListflag=0
+            return
+        }
 
         for(i in 0..(LetterList.data.size-1)){
             var LetterCoordinate=LatLng(
@@ -359,6 +372,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose4)))
                 }
                 markerID+=LetterList.data.get(i).id
+                println(marker)
+                println("!!!!!")
             }
         }
 
