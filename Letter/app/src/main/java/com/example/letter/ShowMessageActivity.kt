@@ -13,18 +13,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ShowMessageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityShowMessageBinding
-
-    var lat: String = ""
-    var lon: String = ""
-    var cat: String = ""
-    var cnt: Int = 0
-    var saw: Int = 0
-    var eti: String = ""
-    var tex: String = ""
-    var name: String = ""
-    var number: String = ""
-    var major: String = ""
-    var tact: String = ""
+    private var id : Int = 0;
+    private var lat: String = ""
+    private var lon: String = ""
+    private var cat: String = ""
+    private var cnt: Int = 0
+    private var saw: Int = 0
+    private var eti: String = ""
+    private var tex: String = ""
+    private var name: String = ""
+    private var number: String = ""
+    private var major: String = ""
+    private var tact: String = ""
+    private lateinit var cpyname: String
+    private lateinit var cpynumber: String
+    private lateinit var cpymajor: String
+    private lateinit var cpytact: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +37,12 @@ class ShowMessageActivity : AppCompatActivity() {
         binding = ActivityShowMessageBinding.inflate(layoutInflater)
         val view=binding.root
         setContentView(view)
+
+        id = Integer.parseInt(intent.getStringExtra("id").toString())
+        cpyname = intent.getStringExtra("cpyname").toString()
+        cpynumber = intent.getStringExtra("cpynumber").toString()
+        cpymajor = intent.getStringExtra("cpymajor").toString()
+        cpytact = intent.getStringExtra("cpytact").toString()
 
         //프로필 사진, 프로필 눌리면 프로필 페이지로 연결'
         binding.ProfilePicture.setOnClickListener{
@@ -55,6 +65,12 @@ class ShowMessageActivity : AppCompatActivity() {
         }
 
         binding.btnBack.setOnClickListener {
+            val nextIntent = Intent(this, MapsActivity::class.java)
+            nextIntent.putExtra("name", cpyname)
+            nextIntent.putExtra("number", cpynumber)
+            nextIntent.putExtra("major", cpymajor)
+            nextIntent.putExtra("tact", cpytact)
+            startActivity(nextIntent)
             finish()
         }
 
@@ -65,7 +81,7 @@ class ShowMessageActivity : AppCompatActivity() {
             .build()
 
         val api = retrofit.create(Connect.GETshowMessage::class.java)!!
-        var letters=api.showMessage(2) // message ID            //id 값 받아오는걸로 수정
+        var letters=api.showMessage(id) // message ID            //id 값 받아오는걸로 수정
 
         letters.enqueue(object : Callback<Connect.ShowMessageStruct> {
             override fun onResponse(
@@ -73,18 +89,18 @@ class ShowMessageActivity : AppCompatActivity() {
                 response: Response<Connect.ShowMessageStruct>
             ) {
                 var tmp=response.body() as Connect.ShowMessageStruct
-                println(tmp.data[1].id)                                   //인덱스 값 확인
-                lat = tmp.data[1].lat
-                lon = tmp.data[1].lon
-                cat = tmp.data[1].cat
-                cnt = tmp.data[1].cnt
-                saw = tmp.data[1].saw
-                eti = tmp.data[1].eti
-                tex = tmp.data[1].tex
-                name = tmp.data[1].name
-                number = tmp.data[1].number
-                major = tmp.data[1].major
-                tact = tmp.data[1].tact
+                //println(tmp.data[1].id)                                   //인덱스 값 확인
+                lat = tmp.data[0].lat
+                lon = tmp.data[0].lon
+                cat = tmp.data[0].cat
+                cnt = tmp.data[0].cnt
+                saw = tmp.data[0].saw
+                eti = tmp.data[0].eti
+                tex = tmp.data[0].tex
+                name = tmp.data[0].name
+                number = tmp.data[0].number
+                major = tmp.data[0].major
+                tact = tmp.data[0].tact
 
                 //get한 data를 화면에 표시
                 binding.PersonPicker.setText("$saw / $cnt")

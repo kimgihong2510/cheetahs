@@ -41,6 +41,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var number:String//로그인 화면에서 가져옴
     private lateinit var major:String//로그인 화면에서 가져옴
     private lateinit var tact:String//로그인 화면에서 가져옴
+    private lateinit var lat : String   //현재위치로 설정되게 해야함
+    private lateinit var lon : String
+
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
@@ -49,7 +52,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     val Radius=50.0
     private lateinit var mapCircle : Circle
     private lateinit var mapDot:Circle
-    lateinit var CurrentCoordinate : LatLng
+    var CurrentCoordinate : LatLng = KNU
 
     val BorderArray = arrayListOf(
         LatLng(35.889540, 128.603830)
@@ -89,8 +92,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         this.number = intent.getStringExtra("number").toString()
         this.tact = intent.getStringExtra("tact").toString()
 
-        var lat : String = ""   //현재위치로 설정되게 해야함
-        var lon : String = ""
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -404,6 +405,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             }
         }
         println(markerID[flag])
+
+        val nextIntent= Intent(this, ShowMessageActivity::class.java)
+        nextIntent.putExtra("id", markerID[flag])
+        nextIntent.putExtra("cpyname", name)
+        nextIntent.putExtra("cpynumber", number)
+        nextIntent.putExtra("cpymajor", major)
+        nextIntent.putExtra("cpytact", tact)
+        startActivity(nextIntent)
         return true
     }
 }
