@@ -1,5 +1,7 @@
 package com.example.letter
 
+import android.os.Message
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.GET
@@ -9,7 +11,10 @@ import retrofit2.http.Query
 class Connect {
     val Urlbase="naver.com"
 
-
+    data class messagemessage(
+        val `data`: List<dataforallMessage>,
+        val message: String
+    )
     data class MessageParams(
         var id: Int =0,
         var lat: String ="",
@@ -25,6 +30,7 @@ class Connect {
         var tact: String =""
     )
     data class dataforallMessage(
+
         var id: Int =0,
         var lat: String ="",
         var lon: String ="",
@@ -36,8 +42,8 @@ class Connect {
 
 
     interface GETallMessage{
-        @GET("/allMessage")
-        fun allMessage(): Call<dataforallMessage>
+        @GET("allMessage")
+        fun allMessage(): Call<messagemessage>
     }
 
     interface POSTsendMessage{

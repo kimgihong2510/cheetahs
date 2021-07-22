@@ -21,6 +21,9 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.google.gson.GsonBuilder
+import retrofit2.*
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -285,6 +288,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun ShowLetter() : Unit{
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://25.61.78.177:8080/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val api = retrofit.create(Connect.GETallMessage::class.java)!!
+        var letters=api.allMessage()
+
+        letters.enqueue(object : Callback<Connect.messagemessage> {
+            override fun onResponse(
+                call: Call<Connect.messagemessage>,
+                response: Response<Connect.messagemessage>
+            ) {
+                var tmp=response.body() as Connect.messagemessage
+                println("${response.body()}")
+            }
+
+            override fun onFailure(call: Call<Connect.messagemessage>, t: Throwable) {
+                println("안됨")
+                //////////////
+            }
+        })
+        api.allMessage()
 
         var LetterCoordinate=CurrentCoordinate
         var Lettermode="Throw"
