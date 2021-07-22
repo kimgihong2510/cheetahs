@@ -20,7 +20,7 @@ class ShowMessageActivity : AppCompatActivity() {
     private var cnt: Int = 0
     private var saw: Int = 0
     private var eti: String = ""
-    private var tex: String = ""
+    private var text: String = ""
     private var name: String = ""
     private var number: String = ""
     private var major: String = ""
@@ -98,7 +98,7 @@ class ShowMessageActivity : AppCompatActivity() {
                 cnt = tmp.data[0].cnt
                 saw = tmp.data[0].saw+1
                 eti = tmp.data[0].eti
-                tex = tmp.data[0].tex
+                text = tmp.data[0].text
                 name = tmp.data[0].name
                 number = tmp.data[0].number
                 major = tmp.data[0].major
@@ -113,7 +113,8 @@ class ShowMessageActivity : AppCompatActivity() {
                     "멘티" -> binding.letter.setBackgroundColor(getResources().getColor(R.color.purpose3))
                     "취준" -> binding.letter.setBackgroundColor(getResources().getColor(R.color.purpose4))
                 }
-                binding.letter.setText(tex);
+                binding.letter.setText("$text");
+                println("text : $text")
                 binding.Profile.setText(number.substring(2,4)+"_"+name.substring(0,3)+"_"+major)
             }
 
@@ -144,10 +145,5 @@ class ShowMessageActivity : AppCompatActivity() {
                 //////////////
             }
         })
-
-
-
     }
-
-
 }

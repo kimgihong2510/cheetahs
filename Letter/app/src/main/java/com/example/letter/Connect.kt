@@ -20,7 +20,7 @@ class Connect {
         var cnt: Int = 0, // 제한 없음일 때는 -1
         var saw: Int = 0,
         var eti: String ="",
-        var tex: String ="",
+        var text: String ="",
         var name: String ="",
         var number: String ="",
         var major: String ="",
@@ -44,7 +44,7 @@ class Connect {
         var cnt: Int = 0, // 제한 없음일 때는 -1
         var saw: Int = 0,
         var eti: String ="",
-        var tex: String ="",
+        var text: String ="",
         var name: String ="",
         var number: String ="",
         var major: String ="",
