@@ -23,25 +23,21 @@
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/NUMBER"
+        app:layout_constraintStart_toStartOf="@+id/NUMBER"
         app:layout_constraintTop_toBottomOf="@+id/NUMBER" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/NUMBER"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
         android:hint="학번"
         android:inputType="numberDecimal"
         android:maxLength="10"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/NAME"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/NAME"
         app:layout_constraintTop_toBottomOf="@+id/NAME" />
 
     <com.google.android.material.textfield.TextInputEditText
@@ -51,8 +47,8 @@
         android:layout_marginTop="50dp"
         android:hint="연락처 or 카카오톡 ID or etc."
         android:maxLength="200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/MAJOR"
+        app:layout_constraintStart_toStartOf="@+id/MAJOR"
         app:layout_constraintTop_toBottomOf="@+id/MAJOR" />
 
     <Button
@@ -70,12 +66,12 @@
         android:id="@+id/text_major"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="480dp"
-        android:layout_marginRight="480dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginRight="300dp"
         android:text="전공"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/MAJOR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/MAJOR"
+        app:layout_constraintStart_toStartOf="@+id/MAJOR" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

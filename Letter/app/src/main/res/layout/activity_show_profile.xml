@@ -86,8 +86,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="left|center_horizontal"
             android:layout_marginLeft="50dp"
+            android:foreground="@drawable/btn_back"
             android:text=""
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
     </FrameLayout>
 
