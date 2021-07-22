@@ -137,9 +137,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         locationRequest.priority=LocationRequest.PRIORITY_HIGH_ACCURACY
 
-        locationRequest.interval=1000
+        locationRequest.interval=500
 
-        locationRequest.fastestInterval = 5000
+        locationRequest.fastestInterval = 2000
     }
 
     /**
