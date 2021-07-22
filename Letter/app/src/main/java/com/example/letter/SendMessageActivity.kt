@@ -97,5 +97,24 @@ class SendMessageActivity : AppCompatActivity() {
             nextIntent.putExtra("tact",tact)
             startActivity(nextIntent)
         }
+        binding.btnBack.setOnClickListener{
+            val nextIntent = Intent(this, MapsActivity::class.java)
+            nextIntent.putExtra("name",name)
+            nextIntent.putExtra("number",number)
+            nextIntent.putExtra("major",major)
+            nextIntent.putExtra("tact",tact)
+            startActivity(nextIntent)
+        }
+        binding.btnThrow.setOnClickListener{
+            val nextIntent = Intent(this, MapsActivity::class.java)
+
+            //맵에 메시지 띄우기 추가
+
+            nextIntent.putExtra("name",name)
+            nextIntent.putExtra("number",number)
+            nextIntent.putExtra("major",major)
+            nextIntent.putExtra("tact",tact)
+            startActivity(nextIntent)
+        }
     }
 }
