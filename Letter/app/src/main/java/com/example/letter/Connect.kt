@@ -32,8 +32,24 @@ class Connect {
         var lat: String ="",
         var lon: String ="",
     )
-    data class dataforshowMessage(
+
+    data class ShowMessageStruct(
+        val `data`: List<ALLMessageParams>,
+        val message: String
+    )
+    data class ALLMessageParams(
         var id: Int =0,
+        var lat: String ="",
+        var lon: String ="",
+        var cat: String ="",
+        var cnt: Int = 0, // 제한 없음일 때는 -1
+        var saw: Int = 0,
+        var eti: String ="",
+        var tex: String ="",
+        var name: String ="",
+        var number: String ="",
+        var major: String ="",
+        var tact: String =""
     )
 
 
@@ -62,9 +78,9 @@ class Connect {
     }
 
     interface GETshowMessage{
-        @GET("/showMessage")
+        @GET("/showMessage/:{messageId}")
         fun showMessage(
-            @Query("id") id: Int,
-        ): Call<MessageParams>
+            @Path("messageId") messageId:Int
+        ): Call<ShowMessageStruct>
     }
 }
