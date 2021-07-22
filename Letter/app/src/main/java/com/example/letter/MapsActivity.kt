@@ -1,12 +1,9 @@
 package com.example.letter
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -21,19 +18,21 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import com.google.gson.GsonBuilder
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
-import java.sql.Types.NULL
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+    val KNU = LatLng(35.888166756477105, 128.61056411139742)
     var LetterList : Connect.messagemessage = Connect.messagemessage(
         listOf(Connect.dataforallMessage(id=0, lat="0", lon="0")), "")
-    lateinit var marker : List<Marker>
-
     private lateinit var mMap: GoogleMap
+
+    var marker : List<Marker> = listOf()
+    var markerID : List<Int> = listOf()
+
+
 
     var ThrowCatchMode="Throw"
 
@@ -51,7 +50,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mapCircle : Circle
     private lateinit var mapDot:Circle
     lateinit var CurrentCoordinate : LatLng
-    val KNU = LatLng(35.888166756477105, 128.61056411139742)
+
     val BorderArray = arrayListOf(
         LatLng(35.889540, 128.603830)
         ,LatLng(35.888454, 128.603830)
@@ -143,14 +142,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
 
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap=googleMap
         // Add a marker in Coordinate and move the camera
         mMap.moveCamera(CameraUpdateFactory.zoomTo(18F))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(KNU))
         //mMap.addMarker(MarkerOptions().position(KNU).title("Marker in KNU_IT"))
-
+        mMap.setOnMarkerClickListener(this)
         /*googleMap.addPolygon(PolygonOptions()
             .add(
                 BorderArray[0],
@@ -180,6 +180,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             )
         )
          */
+
     }
 
 
@@ -290,6 +291,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         return x > pX
     }
 
+
     fun ShowLetter() : Unit{
         ////모든 쪽지 받아오기
         val retrofit = Retrofit.Builder()
@@ -316,15 +318,40 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         })
         println(LetterList)
         println(LetterList.data.size)
+
+        var duration=marker.size-1
+        for(i in 0..duration){
+            marker[i].remove()
+        }
+
+        marker= listOf()
+        markerID=listOf()
+
         for(i in 0..(LetterList.data.size-1)){
             var LetterCoordinate=LatLng(
                 (LetterList.data.get(i).lat).toDouble(),(LetterList.data.get(i).lon).toDouble())
 
 
             if(CheckInRadius(LetterCoordinate) && isPointInPolygon(LetterCoordinate, BorderArray)){
-                marker += (mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
+                marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
                     .position(LetterCoordinate)
-                ))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1))
+                )
+                //marker.get(marker.size).showInfoWindow()
+            }
+        }
+        println(marker)
+        for(i in 0..(LetterList.data.size-1)){
+            var LetterCoordinate=LatLng(
+                (LetterList.data.get(i).lat).toDouble(),(LetterList.data.get(i).lon).toDouble())
+
+
+            if(CheckInRadius(LetterCoordinate) && isPointInPolygon(LetterCoordinate, BorderArray)){
+                marker += mMap.addMarker(MarkerOptions() // 제한시간, 인원수, 카테고리별 색깔 ㅠㅠ
+                    .position(LetterCoordinate)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.purpose1))
+                )
+                markerID+=LetterList.data.get(i).id
                 //marker.get(marker.size).showInfoWindow()
             }
         }
@@ -366,5 +393,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .strokeColor(Color.argb(20,30,255, 255))
                 .fillColor(Color.argb(70,30,255, 255))
         )
+    }
+
+    override fun onMarkerClick(p0: Marker): Boolean {
+        var flag = 0
+        for (i in 0..(marker.size - 1)) {
+            if (p0 == marker[i]) {
+                flag = i
+                break
+            }
+        }
+        println(markerID[flag])
+        return true
     }
 }
