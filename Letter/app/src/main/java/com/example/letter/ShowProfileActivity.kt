@@ -1,5 +1,6 @@
 package com.example.letter
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.letter.databinding.ActivitySendMessageBinding
@@ -29,5 +30,14 @@ class ShowProfileActivity : AppCompatActivity()
         binding.Cont.text=tact
 
         setContentView(view)
+
+        binding.btnBack.setOnClickListener{
+            val ToShowMessage= Intent(this,ShowMessageActivity::class.java)
+            ToShowMessage.putExtra("name",name)
+            ToShowMessage.putExtra("number",number)
+            ToShowMessage.putExtra("major",major)
+            ToShowMessage.putExtra("tact",tact)
+            startActivity(ToShowMessage)
+        };
     }
 }
