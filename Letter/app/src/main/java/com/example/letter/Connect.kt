@@ -82,4 +82,14 @@ class Connect {
             @Path("messageId") messageId:String
         ): Call<ShowMessageStruct>
     }
+
+    interface POSTupdatesaw{
+        @POST("/updateSaw/{messageID}")
+        fun updateSaw(
+            @Path("messageID") messageID:String
+        ): Call<POSTupdatestruct>
+    }
+    data class POSTupdatestruct(
+        val message: String
+    )
 }
