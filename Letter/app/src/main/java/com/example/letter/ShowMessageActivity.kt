@@ -171,5 +171,25 @@ class ShowMessageActivity : AppCompatActivity() {
                 //////////////
             }
         })
+        val retrofit3 = Retrofit.Builder()
+            .baseUrl("http://25.61.78.177:8080/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        var api3 = retrofit.create(Connect.POSTupdateMessage::class.java)!!
+        var letters3=api3.updateMessage(cpynumber, id) // message ID            //id 값 받아오는걸로 수정
+
+        letters3.enqueue(object : Callback<Connect.POSTupdatestruct> {
+            override fun onResponse(
+                call: Call<Connect.POSTupdatestruct>,
+                response: Response<Connect.POSTupdatestruct>
+            ) {
+                println(response.body())
+            }
+
+            override fun onFailure(call: Call<Connect.POSTupdatestruct>, t: Throwable) {
+                println("안됨")
+                //////////////
+            }
+        })
     }
 }

@@ -283,7 +283,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             .build()
 
         val api = retrofit.create(Connect.GETallMessage::class.java)!!
-        var letters=api.allMessage()
+        var letters=api.allMessage(number)
+        println()
 
 
         letters.enqueue(object : Callback<Connect.messagemessage> {

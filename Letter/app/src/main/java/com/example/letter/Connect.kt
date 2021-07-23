@@ -56,10 +56,20 @@ class Connect {
     )
 
 
+    interface POSTupdateMessage{
+        @FormUrlEncoded
+        @POST("/updateMessage")
+        fun updateMessage(
+            @Field("userID") userID:String,
+            @Field("messageID") messageID:Int
+        ): Call<POSTupdatestruct>
+    }
 
     interface GETallMessage{
-        @GET("allMessage")
-        fun allMessage(): Call<messagemessage>
+        @GET("allMessage/{userId}")
+        fun allMessage(
+            @Path("userId") userId:String
+        ): Call<messagemessage>
     }
 
     interface POSTsendMessage{
