@@ -74,6 +74,7 @@
             android:layout_toRightOf="@id/contact"
             android:gravity="center_horizontal"
             android:text="kkt: YooYoo\nIG: YouYou"
+            android:textIsSelectable="true"
             android:textAlignment="textStart"
             android:textSize="20sp" />
     </RelativeLayout>

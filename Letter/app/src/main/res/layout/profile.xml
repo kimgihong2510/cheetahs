@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:text="연락처:"
+
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
