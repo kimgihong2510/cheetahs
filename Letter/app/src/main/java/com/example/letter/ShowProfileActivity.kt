@@ -33,11 +33,6 @@ class ShowProfileActivity : AppCompatActivity()
 
         binding.btnBack.setOnClickListener{
             val ToShowMessage= Intent(this,ShowMessageActivity::class.java)
-            ToShowMessage.putExtra("name",name)
-            ToShowMessage.putExtra("number",number)
-            ToShowMessage.putExtra("major",major)
-            ToShowMessage.putExtra("tact",tact)
-            startActivity(ToShowMessage)
             finish()
         };
     }
