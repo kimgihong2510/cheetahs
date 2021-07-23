@@ -89,7 +89,7 @@
 디렉토리 설명:
   Letter - 안드로이드 앱 코드
   
-  letterSever_code.zip - 서버에서 돌아가는 JS 코드 
+  app.zip - 서버에서 돌아가는 JS 코드 
   
   
   
