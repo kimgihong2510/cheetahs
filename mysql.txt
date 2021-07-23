@@ -1,0 +1,22 @@
+CREATE TABLE `message` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `lat` varchar(100) NOT NULL,
+  `lon` varchar(100) NOT NULL,
+  `cat` varchar(45) NOT NULL,
+  `cnt` int NOT NULL,
+  `saw` int NOT NULL,
+  `eti` varchar(100) NOT NULL,
+  `text` varchar(100) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `number` varchar(45) NOT NULL,
+  `major` varchar(45) NOT NULL,
+  `tact` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `messageid` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userID` varchar(45) NOT NULL,
+  `messageID` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
